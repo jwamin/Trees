@@ -11,11 +11,19 @@ import Cocoa
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
-    @IBOutlet weak var window: NSWindow!
-
+    @IBOutlet var window: NSWindow!
+    
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
+       
+        let rect = NSRect(x: 0, y: 0, width: 800, height: 600)
+        let vc = DrawViewController(rect:rect)
+        
+        window = NSWindow(contentViewController: vc)
+        window.title = "Trees"
+        //window.contentView = vc.view
+        window.makeKeyAndOrderFront(nil)
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
