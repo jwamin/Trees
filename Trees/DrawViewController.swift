@@ -12,7 +12,6 @@ class DrawViewController: NSViewController {
 
     var drawView:DrawView!
     var rect:NSRect!
-    
     var angleSlider:NSSlider!
     
     private static var sliderobservercontext = 0
@@ -22,6 +21,7 @@ class DrawViewController: NSViewController {
         self.rect = rect
     }
     
+    // MARK: View Load methods
     
     override func loadView() {
         view = DrawView(frame: rect)
@@ -31,19 +31,27 @@ class DrawViewController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(drawView,"hello")
-
         angleSlider = NSSlider(value: 90, minValue: 25, maxValue: 100, target: self, action: #selector(update(_:)))
         angleSlider.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
         angleSlider.sliderType = .circular
-        //angleSlider.
         angleSlider.layer?.backgroundColor = NSColor.red.cgColor
-        //angleSlider.addObserver(self, forKeyPath: "floatValue", options: .new, context: &DrawViewController.sliderobservercontext)
+        
+        angleSlider.addObserver(self, forKeyPath: "floatValue", options: .new, context: &DrawViewController.sliderobservercontext)
+        
         view.addSubview(angleSlider)
         
         // Do view setup here.
     }
     
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if(context == &DrawViewController.sliderobservercontext){
+            print(change![.newKey])
+            update(nil)
+        }
+    }
+    
+    
+    // MARK: Scroll wheel
     override func scrollWheel(with event: NSEvent) {
         super.scrollWheel(with: event)
         if(angleSlider.hitTest(event.locationInWindow) != nil){
@@ -57,7 +65,6 @@ class DrawViewController: NSViewController {
             default:
                 print("whaaaa?")
         }
-            update(nil)
         }
     }
     
@@ -69,6 +76,7 @@ class DrawViewController: NSViewController {
     
     deinit {
         print(self)
+        angleSlider.removeObserver(self, forKeyPath: "floatValue")
     }
     
 }
