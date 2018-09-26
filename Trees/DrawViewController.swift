@@ -13,8 +13,9 @@ class DrawViewController: NSViewController {
     var drawView:DrawView!
     var rect:NSRect!
     var angleSlider:NSSlider!
-    
+    var lengthSlider:NSSlider!
     private static var sliderobservercontext = 0
+    private static var linearsliderobservercontext = 1
     
     convenience init(rect:NSRect){
         self.init(nibName: nil, bundle: nil)
@@ -31,22 +32,39 @@ class DrawViewController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        angleSlider = NSSlider(value: 90, minValue: 25, maxValue: 100, target: self, action: #selector(update(_:)))
+
+        setupSliders()
+        // Do view setup here.
+    }
+    
+    func setupSliders(){
+        angleSlider = NSSlider(value: Settings.initialAngle, minValue: Settings.minAngle, maxValue: Settings.maxAngle, target: self, action: #selector(update(_:)))
         angleSlider.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
         angleSlider.sliderType = .circular
         angleSlider.layer?.backgroundColor = NSColor.red.cgColor
-        
         angleSlider.addObserver(self, forKeyPath: "floatValue", options: .new, context: &DrawViewController.sliderobservercontext)
-        
         view.addSubview(angleSlider)
         
-        // Do view setup here.
+        
+        lengthSlider = NSSlider(frame: NSRect(x: 0.0, y: self.view.frame.maxY-30, width: self.view.frame.width, height: 30.0))
+        lengthSlider.minValue = 1.0
+        lengthSlider.maxValue = 200.0
+        lengthSlider.doubleValue = Settings.initialLength
+        lengthSlider.sliderType = .linear
+        lengthSlider.addObserver(self, forKeyPath: "floatValue", options: [.new], context: &DrawViewController.linearsliderobservercontext)
+        lengthSlider.action = #selector(update(_:))
+        lengthSlider.autoresizingMask = [.width,.minYMargin]
+        view.addSubview(lengthSlider)
+        
+        
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if(context == &DrawViewController.sliderobservercontext){
             print(change![.newKey])
             update(nil)
+        } else if (context == &DrawViewController.linearsliderobservercontext){
+            print("value updated!!")
         }
     }
     
@@ -69,8 +87,8 @@ class DrawViewController: NSViewController {
     }
     
     @objc func update(_ sender:Any?){
-        print(angleSlider.floatValue)
-        drawView.updateAngle(angleFloat:angleSlider.floatValue)
+        let updatedSettings = UpdatedSettings(angle:angleSlider.floatValue,length:lengthSlider.floatValue)
+       drawView.updateSettings(settings: updatedSettings)
     }
     
     

@@ -12,17 +12,19 @@ class DrawView: NSView {
 
     private var drawcount = 0
     
-    var distance:CGFloat = 100.0
+    var distance:CGFloat = CGFloat(Settings.initialLength)
     var limit:Int = 10
-    var angleAdjust:CGFloat = 90
-    
+    var angleAdjust:CGFloat = CGFloat(Settings.initialAngle)
+    let colorScheme = Settings.space
     
     override func makeBackingLayer() -> CALayer {
+        print("will return layer")
         return CALayer()
     }
     
-    public func updateAngle(angleFloat:Float){
-        angleAdjust = CGFloat(angleFloat)
+    public func updateSettings(settings:UpdatedSettings){
+        angleAdjust = CGFloat(settings.angle)
+        distance = CGFloat(settings.length)
         self.setNeedsDisplay(self.frame)
     }
     
@@ -31,9 +33,9 @@ class DrawView: NSView {
         //self.wantsLayer = true
     }
     
-//    override var wantsUpdateLayer: Bool{
-//        return true
-//    }
+    override var wantsUpdateLayer: Bool{
+        return true
+    }
     
     required init?(coder decoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -58,7 +60,7 @@ class DrawView: NSView {
         context?.move(to: topoint)
         recursiveDraw(position:topoint, angle: 90,distance: distance, iteration: limit)
 
-        context?.strokePath()
+        //context?.strokePath()
         
         //print("\(drawcount) calls to draw")
     }
@@ -77,15 +79,24 @@ class DrawView: NSView {
         
         let newposition = CGPoint(x: position.x + distance * cos(rads),
                                   y: position.y + distance * sin(rads))
-        
+        context?.beginPath()
         let path = CGMutablePath()
         path.move(to: position)
+        context?.setLineWidth(distance/10/3*2) // reduce the line thickness as we get further up the tree
         path.addLine(to: newposition)
+        switch iteration {
+        case let trunk where (trunk == limit || trunk == limit-1):
+            context?.setStrokeColor(colorScheme[.trunk] ?? Settings.white)
+        case 1:
+            context?.setStrokeColor(colorScheme[.tips] ?? Settings.white)
+        default:
+            context?.setStrokeColor(colorScheme[.branches] ?? Settings.white)
+        }
         context?.addPath(path)
-        
+        context?.strokePath()
         //setup variables for next draw call
         let newiteration = iteration - 1
-        let newDistance = distance / 3 * 2
+        let newDistance = distance / 4 * 3
         
         //2 calls to same recursive function
         recursiveDraw(position: newposition, angle: angle-angleAdjust, distance: newDistance, iteration: newiteration)
