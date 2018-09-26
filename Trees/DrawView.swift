@@ -10,6 +10,8 @@ import Cocoa
 
 class DrawView: NSView {
 
+    private var drawcount = 0
+    
     var distance:CGFloat = 100.0
     var limit:Int = 10
     var angleAdjust:CGFloat = 90
@@ -17,6 +19,11 @@ class DrawView: NSView {
     
     override func makeBackingLayer() -> CALayer {
         return CALayer()
+    }
+    
+    public func updateAngle(angleFloat:Float){
+        angleAdjust = CGFloat(angleFloat)
+        self.setNeedsDisplay(self.frame)
     }
     
     override init(frame frameRect: NSRect) {
@@ -35,6 +42,8 @@ class DrawView: NSView {
     
     override func draw(_ dirtyRect: NSRect) {
         super.draw(dirtyRect)
+        drawcount = 0
+        // Drawing code here.
         let context = NSGraphicsContext.current?.cgContext
         context?.fill(dirtyRect)
         context?.beginPath()
@@ -50,14 +59,16 @@ class DrawView: NSView {
         recursiveDraw(position:topoint, angle: 90,distance: distance, iteration: limit)
 
         context?.strokePath()
-        // Drawing code here.
+        
+        //print("\(drawcount) calls to draw")
     }
     
     func recursiveDraw(position:CGPoint,angle:CGFloat,distance:CGFloat,iteration:Int){
         if(iteration==0){
-            print("limit reached",limit)
             return
         }
+        
+        drawcount+=1
         
         let context = NSGraphicsContext.current?.cgContext
         //magic happens here
