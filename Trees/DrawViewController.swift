@@ -6,7 +6,7 @@
 //  Copyright © 2018 Joss Manger. All rights reserved.
 //
 
-import Cocoa
+import AppKit
 
 class DrawViewController: NSViewController,NSToolbarDelegate,NSWindowDelegate{
     
@@ -18,6 +18,8 @@ class DrawViewController: NSViewController,NSToolbarDelegate,NSWindowDelegate{
     var rect:NSRect!
     var angleSlider:NSSlider!
     var lengthSlider:NSSlider!
+    
+    var colorIndex = 0
     
     private static var sliderobservercontext = 0
     private static var linearsliderobservercontext = 1
@@ -42,6 +44,8 @@ class DrawViewController: NSViewController,NSToolbarDelegate,NSWindowDelegate{
 
         delegate = NSApp.delegate as? AppDelegate
 
+        
+        // Do view setup here.
         drawView = DrawView(frame: NSRect(origin: .zero, size: rect.size))
         //drawView.bounds.origin = .zero
         //drawView.wantsLayer = true
@@ -52,8 +56,7 @@ class DrawViewController: NSViewController,NSToolbarDelegate,NSWindowDelegate{
         createToolbar()
         
         print(delegate.window)
-        // Do view setup here.
-        print(self.becomeFirstResponder())
+    
     }
     
     func createToolbar(){
@@ -61,6 +64,7 @@ class DrawViewController: NSViewController,NSToolbarDelegate,NSWindowDelegate{
         let toolbar = NSToolbar(identifier: "windowToolbar")
         toolbar.displayMode = .iconAndLabel
         toolbar.allowsUserCustomization = true
+        toolbar.allowsExtensionItems = true
         toolbar.delegate = self
         delegate.window.toolbar = toolbar
         
@@ -125,13 +129,22 @@ class DrawViewController: NSViewController,NSToolbarDelegate,NSWindowDelegate{
     }
     
     deinit {
-        print(self)
         angleSlider.removeObserver(self, forKeyPath: "floatValue")
+        lengthSlider.removeObserver(self, forKeyPath: "floatValue")
+        self.resignFirstResponder()
+        delegate.window.close()
+        
+    }
+    
+    func windowShouldClose(_ sender: NSWindow) -> Bool {
+        return true
     }
     
 }
 
-//let myItem:NSToolbarItem.Identifier = NSToolbarItemIde
+let myItem:NSToolbarItem.Identifier = NSToolbarItem.Identifier(rawValue: "myItem")
+let branchesItem:NSToolbarItem.Identifier = NSToolbarItem.Identifier(rawValue: "branchesItem")
+let trunkItem:NSToolbarItem.Identifier = NSToolbarItem.Identifier(rawValue: "trunkItem")
 
 extension DrawViewController{
     
@@ -144,23 +157,56 @@ extension DrawViewController{
     }
     
     func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
-        return [NSToolbarItem.Identifier.showColors]
+        return [NSToolbarItem.Identifier.showColors,myItem]
     }
     
     func toolbarSelectableItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
-       return []
+       return [myItem,branchesItem,trunkItem]
     }
     
     func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
-        return [NSToolbarItem.Identifier.showColors]
+        return [myItem,branchesItem,trunkItem]
     }
     
     func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
+        
+       let colorPickerImageName = NSImage.Name("NSColorPanel")
+        let image = NSImage(named: colorPickerImageName)
+        
         switch itemIdentifier {
+        case myItem:
+            let colors = NSToolbarItem(itemIdentifier: itemIdentifier)
+            colors.image = image
+            colors.label = "Tip color"
+            colors.isEnabled = true
+            colors.tag = Scheme.tips.rawValue
+            colors.toolTip = "Set the tree tip color"
+            colors.target = self
+            colors.action = #selector(presentPicker(_:))
+            return colors
+        case branchesItem:
+            let colors = NSToolbarItem(itemIdentifier: itemIdentifier)
+            
+            colors.label = "Branches color"
+            colors.isEnabled = true
+            colors.tag = Scheme.branches.rawValue
+            colors.toolTip = "Set the tree branch color"
+            colors.target = self
+            colors.action = #selector(presentPicker(_:))
+            colors.image = image
+            return colors
+        case trunkItem:
+            let colors = NSToolbarItem(itemIdentifier: itemIdentifier)
+            colors.image = image
+            colors.label = "Trunk color"
+            colors.isEnabled = true
+            colors.tag = Scheme.trunk.rawValue
+            colors.toolTip = "Set the tree trunk color"
+            colors.target = self
+            colors.action = #selector(presentPicker(_:))
+            return colors
         case NSToolbarItem.Identifier.showColors:
             let colors = NSToolbarItem(itemIdentifier: itemIdentifier)
-            colors.label = "Tip color"
-            colors.toolTip = "Set the tree tip color"
             NSColorPanel.shared.setAction(#selector(changeColor(_:)))
             return colors
         default:
@@ -169,8 +215,14 @@ extension DrawViewController{
     }
     
     
+    @objc func presentPicker(_ sender: NSToolbarItem) {
+        colorIndex = sender.tag
+        print(colorIndex)
+        NSColorPanel.shared.orderFront(nil)
+    }
+    
     @objc func changeColor(_ sender: NSColorPanel?) {
-        drawView.updateSettings(settings: nil)
+        drawView.updateColors(index: colorIndex)
     }
     
   

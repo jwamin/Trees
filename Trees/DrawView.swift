@@ -15,11 +15,17 @@ class DrawView: NSView {
     var distance:CGFloat = CGFloat(Settings.initialLength)
     var limit:Int = Settings.recursionLimit
     var angleAdjust:CGFloat = CGFloat(Settings.initialAngle)
-    let colorScheme = Settings.forest
+    var colorScheme = Settings.forest
     
     override func makeBackingLayer() -> CALayer {
         print("will return layer")
         return CALayer()
+    }
+    
+    public func updateColors(index:Int){
+        colorScheme[Scheme(rawValue: index)!] = NSColorPanel.shared.color.cgColor
+        print(colorScheme)
+        self.setNeedsDisplay(self.frame)
     }
     
     public func updateSettings(settings:UpdatedSettings?){
@@ -93,7 +99,7 @@ class DrawView: NSView {
         case let trunk where (trunk == limit || trunk == limit-1):
             context?.setStrokeColor(colorScheme[.trunk] ?? Settings.white)
         case 1:
-            context?.setStrokeColor(NSColorPanel.shared.color.cgColor ?? colorScheme[.tips] ?? Settings.white)
+            context?.setStrokeColor(colorScheme[.tips] ?? Settings.white)
         default:
             context?.setStrokeColor(colorScheme[.branches] ?? Settings.white)
         }

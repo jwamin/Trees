@@ -12,7 +12,6 @@ import Cocoa
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     var window: NSWindow!
-    var windowController:NSWindowController!
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
@@ -21,7 +20,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         window = NSWindow(contentRect: rect, styleMask: [.titled,.closable,.resizable], backing: .buffered, defer: false)
         
         let vc = DrawViewController(rect:rect)
-        //window = NSWindow(contentViewController: vc)
         print("initialised view controller")
         window.contentViewController = vc
         
@@ -29,10 +27,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         window.makeKeyAndOrderFront(self)
         vc.becomeFirstResponder()
     }
-
+    
+    func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
+        return true
+    }
     
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
+        print("teardown")
     }
 
 
