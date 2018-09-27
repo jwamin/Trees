@@ -20,6 +20,7 @@ class Settings{
     static let maxAngle = 100.0
     static let minAngle = 20.0
     static let initialLength = 100.0
+    static let recursionLimit = 10
     
     static let white = NSColor.white.cgColor
     

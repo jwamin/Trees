@@ -13,9 +13,9 @@ class DrawView: NSView {
     private var drawcount = 0
     
     var distance:CGFloat = CGFloat(Settings.initialLength)
-    var limit:Int = 10
+    var limit:Int = Settings.recursionLimit
     var angleAdjust:CGFloat = CGFloat(Settings.initialAngle)
-    let colorScheme = Settings.space
+    let colorScheme = Settings.forest
     
     override func makeBackingLayer() -> CALayer {
         print("will return layer")
@@ -56,9 +56,10 @@ class DrawView: NSView {
         let fromPoint = CGPoint(x: self.frame.midX, y: self.frame.midY-(distance * CGFloat(limit)))
 //        context?.move(to: fromPoint)
         let topoint = CGPoint(x: self.frame.midX, y: self.frame.midY-distance*1.5)
+        let fixpoint = CGPoint(x: self.frame.midX, y: self.frame.midY-CGFloat(Settings.initialLength)*1.5)
 //        context?.addLine(to: topoint)
-        context?.move(to: topoint)
-        recursiveDraw(position:topoint, angle: 90,distance: distance, iteration: limit)
+        context?.move(to: fixpoint)
+        recursiveDraw(position:fixpoint, angle: 90,distance: distance, iteration: limit)
 
         //context?.strokePath()
         

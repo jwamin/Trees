@@ -8,8 +8,10 @@
 
 import Cocoa
 
-class DrawViewController: NSViewController {
+class DrawViewController: NSViewController,NSToolbarDelegate {
 
+    var delegate:AppDelegate!
+    
     var drawView:DrawView!
     var rect:NSRect!
     var angleSlider:NSSlider!
@@ -22,19 +24,37 @@ class DrawViewController: NSViewController {
         self.rect = rect
     }
     
+    override func keyDown(with event: NSEvent) {
+        print("hkeydown")
+    }
+    
     // MARK: View Load methods
     
     override func loadView() {
-        view = DrawView(frame: rect)
-        print(rect)
-        drawView = (view as! DrawView)
+        drawView = DrawView(frame: rect)
+        //drawView.wantsLayer = true
+        view = drawView
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        delegate = NSApp.delegate as? AppDelegate
+        
+        createToolbar()
         setupSliders()
+        print(delegate.window)
         // Do view setup here.
+        print(self.becomeFirstResponder())
+    }
+    
+    func createToolbar(){
+        
+        let toolbar = NSToolbar(identifier: "windowToolbar")
+        toolbar.displayMode = .default
+        toolbar.delegate = self
+        delegate.window.toolbar = toolbar
+        
     }
     
     func setupSliders(){
@@ -68,6 +88,7 @@ class DrawViewController: NSViewController {
         }
     }
     
+
     
     // MARK: Scroll wheel
     override func scrollWheel(with event: NSEvent) {
@@ -91,10 +112,37 @@ class DrawViewController: NSViewController {
        drawView.updateSettings(settings: updatedSettings)
     }
     
-    
     deinit {
         print(self)
         angleSlider.removeObserver(self, forKeyPath: "floatValue")
+    }
+    
+}
+
+extension DrawViewController{
+    
+    func toolbarWillAddItem(_ notification: Notification) {
+        
+    }
+    
+    func toolbarDidRemoveItem(_ notification: Notification) {
+        
+    }
+    
+    func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
+        return []
+    }
+    
+    func toolbarSelectableItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
+       return []
+    }
+    
+    func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
+        return []
+    }
+    
+    func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
+        return nil
     }
     
 }
