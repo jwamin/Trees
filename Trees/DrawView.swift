@@ -22,9 +22,13 @@ class DrawView: NSView {
         return CALayer()
     }
     
-    public func updateSettings(settings:UpdatedSettings){
-        angleAdjust = CGFloat(settings.angle)
-        distance = CGFloat(settings.length)
+    public func updateSettings(settings:UpdatedSettings?){
+       
+        if let settings = settings{
+            angleAdjust = CGFloat(settings.angle)
+            distance = CGFloat(settings.length)
+        }
+
         self.setNeedsDisplay(self.frame)
     }
     
@@ -89,7 +93,7 @@ class DrawView: NSView {
         case let trunk where (trunk == limit || trunk == limit-1):
             context?.setStrokeColor(colorScheme[.trunk] ?? Settings.white)
         case 1:
-            context?.setStrokeColor(colorScheme[.tips] ?? Settings.white)
+            context?.setStrokeColor(NSColorPanel.shared.color.cgColor ?? colorScheme[.tips] ?? Settings.white)
         default:
             context?.setStrokeColor(colorScheme[.branches] ?? Settings.white)
         }

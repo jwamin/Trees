@@ -8,14 +8,17 @@
 
 import Cocoa
 
-class DrawViewController: NSViewController,NSToolbarDelegate {
+class DrawViewController: NSViewController,NSToolbarDelegate,NSWindowDelegate{
+    
 
     var delegate:AppDelegate!
     
     var drawView:DrawView!
+    
     var rect:NSRect!
     var angleSlider:NSSlider!
     var lengthSlider:NSSlider!
+    
     private static var sliderobservercontext = 0
     private static var linearsliderobservercontext = 1
     
@@ -31,18 +34,23 @@ class DrawViewController: NSViewController,NSToolbarDelegate {
     // MARK: View Load methods
     
     override func loadView() {
-        drawView = DrawView(frame: rect)
-        //drawView.wantsLayer = true
-        view = drawView
+        self.view = NSView(frame: rect)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         delegate = NSApp.delegate as? AppDelegate
+
+        drawView = DrawView(frame: NSRect(origin: .zero, size: rect.size))
+        //drawView.bounds.origin = .zero
+        //drawView.wantsLayer = true
+        drawView.autoresizingMask = [.width,.height]
+        view.addSubview(drawView)
         
-        createToolbar()
         setupSliders()
+        createToolbar()
+        
         print(delegate.window)
         // Do view setup here.
         print(self.becomeFirstResponder())
@@ -51,29 +59,34 @@ class DrawViewController: NSViewController,NSToolbarDelegate {
     func createToolbar(){
         
         let toolbar = NSToolbar(identifier: "windowToolbar")
-        toolbar.displayMode = .default
+        toolbar.displayMode = .iconAndLabel
+        toolbar.allowsUserCustomization = true
         toolbar.delegate = self
         delegate.window.toolbar = toolbar
         
     }
     
     func setupSliders(){
+        
         angleSlider = NSSlider(value: Settings.initialAngle, minValue: Settings.minAngle, maxValue: Settings.maxAngle, target: self, action: #selector(update(_:)))
         angleSlider.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
         angleSlider.sliderType = .circular
         angleSlider.layer?.backgroundColor = NSColor.red.cgColor
         angleSlider.addObserver(self, forKeyPath: "floatValue", options: .new, context: &DrawViewController.sliderobservercontext)
+        
         view.addSubview(angleSlider)
         
         
-        lengthSlider = NSSlider(frame: NSRect(x: 0.0, y: self.view.frame.maxY-30, width: self.view.frame.width, height: 30.0))
+        lengthSlider = NSSlider(frame: NSRect(x: 0.0, y: rect.midY-30, width: rect.width, height: 30.0))
         lengthSlider.minValue = 1.0
         lengthSlider.maxValue = 200.0
+        lengthSlider.layer?.backgroundColor = NSColor.red.cgColor
         lengthSlider.doubleValue = Settings.initialLength
         lengthSlider.sliderType = .linear
         lengthSlider.addObserver(self, forKeyPath: "floatValue", options: [.new], context: &DrawViewController.linearsliderobservercontext)
         lengthSlider.action = #selector(update(_:))
         lengthSlider.autoresizingMask = [.width,.minYMargin]
+        print(lengthSlider.frame)
         view.addSubview(lengthSlider)
         
         
@@ -81,7 +94,6 @@ class DrawViewController: NSViewController,NSToolbarDelegate {
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if(context == &DrawViewController.sliderobservercontext){
-            print(change![.newKey])
             update(nil)
         } else if (context == &DrawViewController.linearsliderobservercontext){
             print("value updated!!")
@@ -119,6 +131,8 @@ class DrawViewController: NSViewController,NSToolbarDelegate {
     
 }
 
+//let myItem:NSToolbarItem.Identifier = NSToolbarItemIde
+
 extension DrawViewController{
     
     func toolbarWillAddItem(_ notification: Notification) {
@@ -130,7 +144,7 @@ extension DrawViewController{
     }
     
     func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
-        return []
+        return [NSToolbarItem.Identifier.showColors]
     }
     
     func toolbarSelectableItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
@@ -138,11 +152,26 @@ extension DrawViewController{
     }
     
     func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
-        return []
+        return [NSToolbarItem.Identifier.showColors]
     }
     
     func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
-        return nil
+        switch itemIdentifier {
+        case NSToolbarItem.Identifier.showColors:
+            let colors = NSToolbarItem(itemIdentifier: itemIdentifier)
+            colors.label = "Tip color"
+            colors.toolTip = "Set the tree tip color"
+            NSColorPanel.shared.setAction(#selector(changeColor(_:)))
+            return colors
+        default:
+            return nil
+        }
     }
     
+    
+    @objc func changeColor(_ sender: NSColorPanel?) {
+        drawView.updateSettings(settings: nil)
+    }
+    
+  
 }
