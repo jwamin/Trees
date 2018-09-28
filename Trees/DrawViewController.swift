@@ -56,7 +56,7 @@ class DrawViewController: NSViewController,NSToolbarDelegate,NSWindowDelegate{
         setupSliders()
         createToolbar()
         
-        print(delegate.window)
+        
     
     }
     
@@ -67,7 +67,7 @@ class DrawViewController: NSViewController,NSToolbarDelegate,NSWindowDelegate{
         toolbar.allowsUserCustomization = true
         toolbar.allowsExtensionItems = true
         toolbar.delegate = self
-        delegate.window.toolbar = toolbar
+        delegate.windowController.window?.toolbar = toolbar
         
     }
     
@@ -130,21 +130,19 @@ class DrawViewController: NSViewController,NSToolbarDelegate,NSWindowDelegate{
     }
     
     deinit {
+        print("deinitialising view controller")
+        
+        delegate = nil
         angleSlider.removeObserver(self, forKeyPath: "floatValue")
         lengthSlider.removeObserver(self, forKeyPath: "floatValue")
         self.resignFirstResponder()
-        delegate.window.close()
         
     }
     
     func windowShouldClose(_ sender: NSWindow) -> Bool {
-        print("whaaaa?")
-        if(sender.contentViewController?.className == self.className){
-            return true
-        } else {
-            print("whaaaa?")
-            return false
-        }
+        print("window closing")
+        delegate.windowIsOpen = false
+        return true
         
     }
     
