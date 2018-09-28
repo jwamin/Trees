@@ -8,6 +8,8 @@
 
 import Cocoa
 
+//UI Elements
+
 func createTextLabel(rect:NSRect,str:String)->NSTextView{
     
     let label = NSTextView(frame: rect)
@@ -25,3 +27,13 @@ func createTextLabel(rect:NSRect,str:String)->NSTextView{
     
     
 }
+
+//Maths
+
+//No need to include GLKit here...
+func degToRad(deg:CGFloat)->CGFloat{
+    return deg * (.pi / 180)
+}
+
+
+let 😲 = "Leah"

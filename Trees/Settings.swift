@@ -24,6 +24,8 @@ class Settings{
     
     static let initialWidth = 7
     
+    static let numberOfTrees = 2
+    
     static let white = NSColor.white.cgColor
     
     static let space:[Scheme:CGColor] = [

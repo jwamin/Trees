@@ -19,6 +19,7 @@ class DrawViewController: NSViewController,NSToolbarDelegate,NSWindowDelegate{
     var rect:NSRect!
     var angleSlider:NSSlider!
     var lengthSlider:NSSlider!
+    var label:NSTextView!
     
     var colorIndex = 0
     
@@ -55,24 +56,12 @@ class DrawViewController: NSViewController,NSToolbarDelegate,NSWindowDelegate{
         
         setupSliders()
         createToolbar()
-        
-        
     
-    }
-    
-    func createToolbar(){
-        
-        let toolbar = NSToolbar(identifier: "windowToolbar")
-        toolbar.displayMode = .iconAndLabel
-        toolbar.allowsUserCustomization = true
-        toolbar.allowsExtensionItems = true
-        toolbar.delegate = self
-        delegate.windowController.window?.toolbar = toolbar
-        
     }
     
     func setupSliders(){
         
+        //create angleSlider
         angleSlider = NSSlider(value: Settings.initialAngle, minValue: Settings.minAngle, maxValue: Settings.maxAngle, target: self, action: #selector(update(_:)))
         angleSlider.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
         angleSlider.sliderType = .circular
@@ -81,7 +70,12 @@ class DrawViewController: NSViewController,NSToolbarDelegate,NSWindowDelegate{
         
         view.addSubview(angleSlider)
         
+        label = createTextLabel(rect: angleSlider.frame, str: "90°")
+        label.textColor = NSColor.white
+        label.frame.origin.x = label.frame.width
+        view.addSubview(label)
         
+        //Create Lengthslider
         lengthSlider = NSSlider(frame: NSRect(x: 0.0, y: rect.midY-30, width: rect.width, height: 30.0))
         lengthSlider.minValue = 1.0
         lengthSlider.maxValue = 200.0
@@ -97,6 +91,8 @@ class DrawViewController: NSViewController,NSToolbarDelegate,NSWindowDelegate{
         
     }
     
+    
+    //KVO
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if(context == &DrawViewController.sliderobservercontext){
             update(nil)
@@ -105,7 +101,13 @@ class DrawViewController: NSViewController,NSToolbarDelegate,NSWindowDelegate{
         }
     }
     
-
+    
+    @objc func update(_ sender:Any?){
+        label.string = String(angleSlider.floatValue)+"°"
+        let updatedSettings = UpdatedSettings(angle:angleSlider.floatValue,length:lengthSlider.floatValue)
+        drawView.updateSettings(settings: updatedSettings)
+    }
+    
     
     // MARK: Scroll wheel
     override func scrollWheel(with event: NSEvent) {
@@ -120,18 +122,13 @@ class DrawViewController: NSViewController,NSToolbarDelegate,NSWindowDelegate{
                 angleSlider.floatValue -= 1.0
             default:
                 print("whaaaa?")
-        }
+            }
         }
     }
     
-    @objc func update(_ sender:Any?){
-        let updatedSettings = UpdatedSettings(angle:angleSlider.floatValue,length:lengthSlider.floatValue)
-       drawView.updateSettings(settings: updatedSettings)
-    }
-    
+    //Deinit methods
     deinit {
-        print("deinitialising view controller")
-        
+
         delegate = nil
         angleSlider.removeObserver(self, forKeyPath: "floatValue")
         lengthSlider.removeObserver(self, forKeyPath: "floatValue")
@@ -143,18 +140,20 @@ class DrawViewController: NSViewController,NSToolbarDelegate,NSWindowDelegate{
         print("window closing")
         delegate.windowIsOpen = false
         return true
-        
     }
     
 }
 
 extension DrawViewController{
     
-    func toolbarWillAddItem(_ notification: Notification) {
+    func createToolbar(){
         
-    }
-    
-    func toolbarDidRemoveItem(_ notification: Notification) {
+        let toolbar = NSToolbar(identifier: "windowToolbar")
+        toolbar.displayMode = .iconAndLabel
+        toolbar.allowsUserCustomization = true
+        toolbar.allowsExtensionItems = true
+        toolbar.delegate = self
+        delegate.windowController.window?.toolbar = toolbar
         
     }
     
@@ -172,29 +171,31 @@ extension DrawViewController{
     
     func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
         
-       let colorPickerImageName = NSImage.Name("NSColorPanel")
-        let image = NSImage(named: colorPickerImageName)
+        func returnColorPicker(label:String) -> NSToolbarItem{
+            let colorPickerImageName = NSImage.Name("NSColorPanel")
+            let image = NSImage(named: colorPickerImageName)
+            var colorPicker = NSToolbarItem(itemIdentifier: NSToolbarItem.Identifier.showColors)
+            colorPicker.label = "\(label.capitalized) color"
+            colorPicker.paletteLabel = colorPicker.label
+            colorPicker.toolTip = "Set the \(label) color"
+            colorPicker.isEnabled = true
+            colorPicker.image = image
+            colorPicker.action = #selector(presentPicker(_:))
+            return colorPicker
+        }
         
         switch itemIdentifier {
         case myItem:
-            let colors = NSToolbarItem(itemIdentifier: itemIdentifier)
-            colors.image = image
-            colors.label = "Tip color"
-            colors.isEnabled = true
+            let colors = returnColorPicker(label: "tip")
             colors.tag = Scheme.tips.rawValue
-            colors.toolTip = "Set the tree tip color"
-            colors.target = self
-            colors.action = #selector(presentPicker(_:))
             return colors
         case branchesItem:
-            let colors = NSToolbarItem(itemIdentifier: itemIdentifier)
-            colors.label = "Branches color"
-            colors.isEnabled = true
+            let colors = returnColorPicker(label: "branch")
             colors.tag = Scheme.branches.rawValue
-            colors.toolTip = "Set the tree branch color"
-            colors.target = self
-            colors.action = #selector(presentPicker(_:))
-            colors.image = image
+            return colors
+        case trunkItem:
+            let colors = returnColorPicker(label: "trunk")
+            colors.tag = Scheme.trunk.rawValue
             return colors
         case settings:
             let settings = NSToolbarItem(itemIdentifier: itemIdentifier)
@@ -205,23 +206,10 @@ extension DrawViewController{
             settings.action = #selector(displaySettingsPanel(_:))
             settings.image = NSImage(named: NSImage.Name("NSAdvanced"))
             return settings
-        case trunkItem:
-            let colors = NSToolbarItem(itemIdentifier: itemIdentifier)
-            colors.image = image
-            colors.label = "Trunk color"
-            colors.isEnabled = true
-            colors.tag = Scheme.trunk.rawValue
-            colors.toolTip = "Set the tree trunk color"
-            colors.target = self
-            colors.action = #selector(presentPicker(_:))
-            return colors
-        case NSToolbarItem.Identifier.showColors:
-            let colors = NSToolbarItem(itemIdentifier: itemIdentifier)
-            NSColorPanel.shared.setAction(#selector(changeColor(_:)))
-            return colors
         default:
             return nil
         }
+        
     }
     
     
@@ -239,14 +227,10 @@ extension DrawViewController{
         
         
         if let settingsController = settingsController{
-            
-            print("isloaded ",settingsController.isWindowLoaded)
-            print("initialised")
-            
+
             settingsController.window?.makeKeyAndOrderFront(self)
             
         } else {
-            print("not initialised")
 
             settingsController = SettingsWindowController()
             settingsController?.loadWindow()
