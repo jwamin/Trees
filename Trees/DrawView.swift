@@ -63,13 +63,16 @@ class DrawView: NSView {
         context?.setLineWidth(5.0)
         context?.setLineCap(.round)
  
-        let fromPoint = CGPoint(x: self.frame.midX, y: self.frame.midY-(distance * CGFloat(limit)))
+        for i in 0...2{
+            let fixpoint = CGPoint(x: CGFloat(i) * self.frame.midX, y: self.frame.midY-CGFloat(Settings.initialLength)*1.5)
+            context?.move(to: fixpoint)
+            recursiveDraw(position:fixpoint, angle: 90,distance: distance, iteration: limit)
+        }
+        
+  //      let fromPoint = CGPoint(x: self.frame.midX, y: self.frame.midY-(distance * CGFloat(limit)))
 //        context?.move(to: fromPoint)
-        let topoint = CGPoint(x: self.frame.midX, y: self.frame.midY-distance*1.5)
-        let fixpoint = CGPoint(x: self.frame.midX, y: self.frame.midY-CGFloat(Settings.initialLength)*1.5)
-//        context?.addLine(to: topoint)
-        context?.move(to: fixpoint)
-        recursiveDraw(position:fixpoint, angle: 90,distance: distance, iteration: limit)
+  //      let topoint = CGPoint(x: self.frame.midX, y: self.frame.midY-distance*1.5)
+
 
         //context?.strokePath()
         

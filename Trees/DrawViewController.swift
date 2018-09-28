@@ -10,6 +10,7 @@ import AppKit
 
 class DrawViewController: NSViewController,NSToolbarDelegate,NSWindowDelegate{
     
+    var settingsController:SettingsWindowController?
 
     var delegate:AppDelegate!
     
@@ -137,14 +138,17 @@ class DrawViewController: NSViewController,NSToolbarDelegate,NSWindowDelegate{
     }
     
     func windowShouldClose(_ sender: NSWindow) -> Bool {
-        return true
+        print("whaaaa?")
+        if(sender.contentViewController?.className == self.className){
+            return true
+        } else {
+            print("whaaaa?")
+            return false
+        }
+        
     }
     
 }
-
-let myItem:NSToolbarItem.Identifier = NSToolbarItem.Identifier(rawValue: "myItem")
-let branchesItem:NSToolbarItem.Identifier = NSToolbarItem.Identifier(rawValue: "branchesItem")
-let trunkItem:NSToolbarItem.Identifier = NSToolbarItem.Identifier(rawValue: "trunkItem")
 
 extension DrawViewController{
     
@@ -157,7 +161,7 @@ extension DrawViewController{
     }
     
     func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
-        return [NSToolbarItem.Identifier.showColors,myItem]
+        return [myItem,branchesItem,trunkItem,NSToolbarItem.Identifier.flexibleSpace,settings]
     }
     
     func toolbarSelectableItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
@@ -165,7 +169,7 @@ extension DrawViewController{
     }
     
     func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
-        return [myItem,branchesItem,trunkItem]
+        return [myItem,branchesItem,trunkItem,NSToolbarItem.Identifier.flexibleSpace,settings]
     }
     
     func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
@@ -186,7 +190,6 @@ extension DrawViewController{
             return colors
         case branchesItem:
             let colors = NSToolbarItem(itemIdentifier: itemIdentifier)
-            
             colors.label = "Branches color"
             colors.isEnabled = true
             colors.tag = Scheme.branches.rawValue
@@ -195,6 +198,15 @@ extension DrawViewController{
             colors.action = #selector(presentPicker(_:))
             colors.image = image
             return colors
+        case settings:
+            let settings = NSToolbarItem(itemIdentifier: itemIdentifier)
+            settings.label = "Advanced"
+            settings.isEnabled = true
+            settings.toolTip = "Adjust advanced settings"
+            settings.target = self
+            settings.action = #selector(displaySettingsPanel(_:))
+            settings.image = NSImage(named: NSImage.Name("NSAdvanced"))
+            return settings
         case trunkItem:
             let colors = NSToolbarItem(itemIdentifier: itemIdentifier)
             colors.image = image
@@ -225,5 +237,28 @@ extension DrawViewController{
         drawView.updateColors(index: colorIndex)
     }
     
+    @objc func displaySettingsPanel(_ sender: Any?) {
+        
+        
+        if let settingsController = settingsController{
+            
+            print("isloaded ",settingsController.isWindowLoaded)
+            print("initialised")
+            
+            settingsController.window?.makeKeyAndOrderFront(self)
+            
+        } else {
+            print("not initialised")
+
+            settingsController = SettingsWindowController()
+            settingsController?.loadWindow()
+            settingsController!.window?.makeKeyAndOrderFront(self)
+            
+        }
+
+        
+    }
+    
+
   
 }

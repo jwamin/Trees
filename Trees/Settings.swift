@@ -22,6 +22,8 @@ class Settings{
     static let initialLength = 100.0
     static let recursionLimit = 10
     
+    static let initialWidth = 7
+    
     static let white = NSColor.white.cgColor
     
     static let space:[Scheme:CGColor] = [
@@ -42,3 +44,9 @@ struct UpdatedSettings {
     let angle:Float
     let length:Float
 }
+
+
+let myItem:NSToolbarItem.Identifier = NSToolbarItem.Identifier(rawValue: "myItem")
+let branchesItem:NSToolbarItem.Identifier = NSToolbarItem.Identifier(rawValue: "branchesItem")
+let trunkItem:NSToolbarItem.Identifier = NSToolbarItem.Identifier(rawValue: "trunkItem")
+let settings:NSToolbarItem.Identifier = NSToolbarItem.Identifier(rawValue: "settings")

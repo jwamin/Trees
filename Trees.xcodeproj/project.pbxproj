@@ -13,6 +13,8 @@
 		3D7CE7ED215BD3E7000E751C /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D7CE7EB215BD3E7000E751C /* MainMenu.xib */; };
 		3D7CE7F6215BD471000E751C /* DrawViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7CE7F5215BD471000E751C /* DrawViewController.swift */; };
 		3D7CE7F8215BD58D000E751C /* DrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7CE7F7215BD58D000E751C /* DrawView.swift */; };
+		3DB635DB215E6DCE00AF9956 /* SettingsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB635DA215E6DCE00AF9956 /* SettingsWindowController.swift */; };
+		3DB635DD215E929F00AF9956 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB635DC215E929F00AF9956 /* Helpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,9 @@
 		3D7CE7F5215BD471000E751C /* DrawViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawViewController.swift; sourceTree = "<group>"; };
 		3D7CE7F7215BD58D000E751C /* DrawView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawView.swift; sourceTree = "<group>"; };
 		3D7CE7F9215BF791000E751C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		3DB635D7215E64B500AF9956 /* Design.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Design.xib; sourceTree = "<group>"; };
+		3DB635DA215E6DCE00AF9956 /* SettingsWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWindowController.swift; sourceTree = "<group>"; };
+		3DB635DC215E929F00AF9956 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,8 +68,11 @@
 				3D7CE7F5215BD471000E751C /* DrawViewController.swift */,
 				3D7CE7F7215BD58D000E751C /* DrawView.swift */,
 				3D22DDA5215C16920088561A /* Settings.swift */,
+				3DB635DA215E6DCE00AF9956 /* SettingsWindowController.swift */,
+				3DB635DC215E929F00AF9956 /* Helpers.swift */,
 				3D7CE7E9215BD3E7000E751C /* Assets.xcassets */,
 				3D7CE7EB215BD3E7000E751C /* MainMenu.xib */,
+				3DB635D7215E64B500AF9956 /* Design.xib */,
 				3D7CE7EE215BD3E7000E751C /* Info.plist */,
 				3D7CE7EF215BD3E7000E751C /* Trees.entitlements */,
 			);
@@ -142,8 +150,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D7CE7F6215BD471000E751C /* DrawViewController.swift in Sources */,
+				3DB635DD215E929F00AF9956 /* Helpers.swift in Sources */,
 				3D7CE7E8215BD3E5000E751C /* AppDelegate.swift in Sources */,
 				3D22DDA6215C16920088561A /* Settings.swift in Sources */,
+				3DB635DB215E6DCE00AF9956 /* SettingsWindowController.swift in Sources */,
 				3D7CE7F8215BD58D000E751C /* DrawView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
