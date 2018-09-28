@@ -125,7 +125,7 @@ class DrawViewController: NSViewController,NSToolbarDelegate,NSWindowDelegate{
                 print("down")
                 angleSlider.floatValue -= 1.0
             default:
-                print("whaaaa?")
+                angleSlider.floatValue += 0
             }
         }
     }
