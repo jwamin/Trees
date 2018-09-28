@@ -57,6 +57,8 @@ class DrawViewController: NSViewController,NSToolbarDelegate,NSWindowDelegate{
         setupSliders()
         createToolbar()
     
+        update(self)
+        
     }
     
     func setupSliders(){
@@ -72,6 +74,8 @@ class DrawViewController: NSViewController,NSToolbarDelegate,NSWindowDelegate{
         
         label = createTextLabel(rect: angleSlider.frame, str: "90°")
         label.textColor = NSColor.white
+        label.alignment = .natural
+        
         label.frame.origin.x = label.frame.width
         view.addSubview(label)
         
@@ -103,7 +107,7 @@ class DrawViewController: NSViewController,NSToolbarDelegate,NSWindowDelegate{
     
     
     @objc func update(_ sender:Any?){
-        label.string = String(angleSlider.floatValue)+"°"
+        label.string = String(Int(angleSlider.floatValue.rounded()))+"°"
         let updatedSettings = UpdatedSettings(angle:angleSlider.floatValue,length:lengthSlider.floatValue)
         drawView.updateSettings(settings: updatedSettings)
     }
