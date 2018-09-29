@@ -49,16 +49,17 @@ class DrawViewController: NSViewController,NSToolbarDelegate,NSWindowDelegate{
         
         // Do view setup here.
         drawView = DrawView(frame: NSRect(origin: .zero, size: rect.size))
-        //drawView.bounds.origin = .zero
-        //drawView.wantsLayer = true
+        drawView.bounds.origin = .zero
         drawView.autoresizingMask = [.width,.height]
-        view.addSubview(drawView)
         
+        view.addSubview(drawView)
+        print(drawView,view.subviews)
         setupSliders()
         createToolbar()
     
         update(self)
-        
+        view.setNeedsDisplay(self.view.frame)
+        drawView.setNeedsDisplay(self.view.frame)
     }
     
     func setupSliders(){
@@ -75,7 +76,7 @@ class DrawViewController: NSViewController,NSToolbarDelegate,NSWindowDelegate{
         label = createTextLabel(rect: angleSlider.frame, str: "90°")
         label.textColor = NSColor.white
         label.alignment = .natural
-        
+        label.autoresizingMask = [.maxYMargin,.maxXMargin]
         label.frame.origin.x = label.frame.width
         view.addSubview(label)
         
@@ -107,6 +108,7 @@ class DrawViewController: NSViewController,NSToolbarDelegate,NSWindowDelegate{
     
     
     @objc func update(_ sender:Any?){
+        print("update called")
         label.string = String(Int(angleSlider.floatValue.rounded()))+"°"
         let updatedSettings = UpdatedSettings(angle:angleSlider.floatValue,length:lengthSlider.floatValue)
         drawView.updateSettings(settings: updatedSettings)
@@ -178,7 +180,7 @@ extension DrawViewController{
         func returnColorPicker(label:String) -> NSToolbarItem{
             let colorPickerImageName = NSImage.Name("NSColorPanel")
             let image = NSImage(named: colorPickerImageName)
-            var colorPicker = NSToolbarItem(itemIdentifier: NSToolbarItem.Identifier.showColors)
+            let colorPicker = NSToolbarItem(itemIdentifier: NSToolbarItem.Identifier.showColors)
             colorPicker.label = "\(label.capitalized) color"
             colorPicker.paletteLabel = colorPicker.label
             colorPicker.toolTip = "Set the \(label) color"

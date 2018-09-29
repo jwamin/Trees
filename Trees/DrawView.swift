@@ -17,10 +17,10 @@ class DrawView: NSView {
     var angleAdjust:CGFloat = CGFloat(Settings.initialAngle)
     var colorScheme = Settings.forest
     
-    override func makeBackingLayer() -> CALayer {
-        print("will return layer")
-        return CALayer()
-    }
+//    override func makeBackingLayer() -> CALayer {
+//        print("will return layer")
+//        return CALayer()
+//    }
     
     public func updateColors(index:Int){
         colorScheme[Scheme(rawValue: index)!] = NSColorPanel.shared.color.cgColor
@@ -40,11 +40,6 @@ class DrawView: NSView {
     
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
-        //self.wantsLayer = true
-    }
-    
-    override var wantsUpdateLayer: Bool{
-        return true
     }
     
     required init?(coder decoder: NSCoder) {
@@ -58,7 +53,7 @@ class DrawView: NSView {
     override func draw(_ dirtyRect: NSRect) {
         
         super.draw(dirtyRect)
-        
+        print("drawing",frame)
         // Drawing code here.
         let context = NSGraphicsContext.current?.cgContext
         context?.fill(dirtyRect)
