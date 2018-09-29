@@ -46,7 +46,6 @@ class DrawViewController: NSViewController,NSToolbarDelegate,NSWindowDelegate{
 
         delegate = NSApp.delegate as? AppDelegate
 
-        
         // Do view setup here.
         drawView = DrawView(frame: NSRect(origin: .zero, size: rect.size))
         drawView.bounds.origin = .zero
@@ -58,9 +57,15 @@ class DrawViewController: NSViewController,NSToolbarDelegate,NSWindowDelegate{
         createToolbar()
     
         update(self)
-        view.setNeedsDisplay(self.view.frame)
-        drawView.setNeedsDisplay(self.view.frame)
+//        view.setNeedsDisplay(self.view.frame)
+//        drawView.setNeedsDisplay(self.view.frame)
     }
+    
+    @IBAction func printView(_ sender: Any) {
+         NSPrintOperation.init(view: self.drawView).run()
+    }
+   
+   
     
     func setupSliders(){
         
