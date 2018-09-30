@@ -23,7 +23,7 @@ class DrawView: NSView {
 //    }
     
     public func updateColors(index:Int){
-        colorScheme[Scheme(rawValue: index)!] = NSColorPanel.shared.color.cgColor
+        colorScheme[ColorSchemeIndex(rawValue: index)!] = NSColorPanel.shared.color.cgColor
         print(colorScheme)
         self.setNeedsDisplay(self.frame)
     }

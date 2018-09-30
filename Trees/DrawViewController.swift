@@ -198,15 +198,15 @@ extension DrawViewController{
         switch itemIdentifier {
         case myItem:
             let colors = returnColorPicker(label: "tip")
-            colors.tag = Scheme.tips.rawValue
+            colors.tag = ColorSchemeIndex.tips.rawValue
             return colors
         case branchesItem:
             let colors = returnColorPicker(label: "branch")
-            colors.tag = Scheme.branches.rawValue
+            colors.tag = ColorSchemeIndex.branches.rawValue
             return colors
         case trunkItem:
             let colors = returnColorPicker(label: "trunk")
-            colors.tag = Scheme.trunk.rawValue
+            colors.tag = ColorSchemeIndex.trunk.rawValue
             return colors
         case settings:
             let settings = NSToolbarItem(itemIdentifier: itemIdentifier)
