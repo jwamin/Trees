@@ -56,7 +56,7 @@ class DrawViewController: NSViewController,NSToolbarDelegate,NSWindowDelegate{
         print(drawView,view.subviews)
         setupSliders()
         createToolbar()
-    
+        
         update(self)
 //        view.setNeedsDisplay(self.view.frame)
 //        drawView.setNeedsDisplay(self.view.frame)
@@ -99,6 +99,7 @@ class DrawViewController: NSViewController,NSToolbarDelegate,NSWindowDelegate{
         print(lengthSlider.frame)
         view.addSubview(lengthSlider)
         
+        updateTrackingArea()
         
     }
     
@@ -119,7 +120,27 @@ class DrawViewController: NSViewController,NSToolbarDelegate,NSWindowDelegate{
         let updatedSettings = UpdatedSettings(angle:angleSlider.floatValue,length:lengthSlider.floatValue)
         drawView.updateSettings(settings: updatedSettings)
     }
+
     
+    func updateTrackingArea(){
+        
+        self.drawView.addTrackingRect(drawView.frame, owner: self, userData: nil, assumeInside: false)
+        
+        
+    }
+    
+    
+    override func mouseEntered(with event: NSEvent) {
+        super.mouseEntered(with: event)
+        print("entered")
+        NSCursor.crosshair.set()
+    }
+    
+    override func mouseExited(with event: NSEvent) {
+        super.mouseExited(with: event)
+         print("exited")
+        NSCursor.arrow.set()
+    }
     
     // MARK: Scroll wheel
     override func scrollWheel(with event: NSEvent) {

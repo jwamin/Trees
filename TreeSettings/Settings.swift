@@ -17,6 +17,8 @@ public enum ColorSchemeIndex:Int{
 //Tree model
 public class Tree {
     
+    var name:String?
+    
     //position of tree origin (base of trunk)
     var position: CGPoint?
     
