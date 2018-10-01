@@ -34,6 +34,10 @@ public class Tree {
         position = placeAtPoint
     }
     
+    public func printColor(){
+        print(self.colorScheme)
+    }
+    
     //tweak colorscheme
     public func setColorScheme(newScheme:[ColorSchemeIndex:CGColor]){
         colorScheme = newScheme
@@ -48,22 +52,11 @@ public class Tree {
             colorScheme[index] = (color as! CGColor)
         default:
             print("guess it's not a color")
-            return
+            throw Errors.fail
         }
         
-        
-//        if color is NSColor{
-//            print("color is NSColor")
-//            let castColor = color as! NSColor
-//            colorScheme[index] = castColor.cgColor
-//        } else if CFGetTypeID(color as! CGColor) == CGColor.typeID{
-//            colorScheme[index] = (color as! CGColor)
-//        } else {
-//            print("pretty sure this ain't a color")
-//        }
-
     }
-
+    
 }
 
 enum Errors:Error{
@@ -72,27 +65,27 @@ enum Errors:Error{
 
 //refactor all of this into a Tree object with all the relevant data
 
-class Settings{
+public class Settings{
     
-    static let initialAngle = 25.0
-    static let maxAngle = 100.0
-    static let minAngle = 20.0
-    static let initialLength = 100.0
-    static let recursionLimit = 10
+    public static let initialAngle = 25.0
+    public static let maxAngle = 100.0
+    public static let minAngle = 20.0
+    public static let initialLength = 100.0
+    public static let recursionLimit = 10
     
-    static let initialWidth = 7
+    public static let initialWidth = 7
     
-    static let numberOfTrees = 2
+    public static let numberOfTrees = 2
     
-    static let white = NSColor.white.cgColor
+    public static let white = NSColor.white.cgColor
     
-    static let space:[ColorSchemeIndex:CGColor] = [
+    public static let space:[ColorSchemeIndex:CGColor] = [
         .trunk:NSColor.gray.cgColor,
         .branches:NSColor.blue.cgColor,
         .tips:NSColor.red.cgColor
     ]
     
-    static let forest:[ColorSchemeIndex:CGColor] = [
+    public static let forest:[ColorSchemeIndex:CGColor] = [
         .trunk:NSColor.brown.cgColor,
         .branches:NSColor.brown.cgColor,
         .tips:NSColor.green.cgColor
@@ -103,13 +96,12 @@ class Settings{
     
 }
 
-struct UpdatedSettings {
-    let angle:Float
-    let length:Float
+public struct UpdatedSettings {
+   public let angle:Float
+   public let length:Float
+   public init (angle:Float,length:Float){
+        self.angle = angle
+        self.length = length
+    }
 }
 
-//Toolbar custom items
-let myItem:NSToolbarItem.Identifier = NSToolbarItem.Identifier(rawValue: "myItem")
-let branchesItem:NSToolbarItem.Identifier = NSToolbarItem.Identifier(rawValue: "branchesItem")
-let trunkItem:NSToolbarItem.Identifier = NSToolbarItem.Identifier(rawValue: "trunkItem")
-let settings:NSToolbarItem.Identifier = NSToolbarItem.Identifier(rawValue: "settings")

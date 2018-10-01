@@ -7,6 +7,7 @@
 //
 
 import AppKit
+import TreeSettings
 
 class DrawViewController: NSViewController,NSToolbarDelegate,NSWindowDelegate{
     

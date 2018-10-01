@@ -35,5 +35,12 @@ func degToRad(deg:CGFloat)->CGFloat{
     return deg * (.pi / 180)
 }
 
+//Toolbar custom items
+let myItem:NSToolbarItem.Identifier = NSToolbarItem.Identifier(rawValue: "myItem")
+let branchesItem:NSToolbarItem.Identifier = NSToolbarItem.Identifier(rawValue: "branchesItem")
+let trunkItem:NSToolbarItem.Identifier = NSToolbarItem.Identifier(rawValue: "trunkItem")
+let settings:NSToolbarItem.Identifier = NSToolbarItem.Identifier(rawValue: "settings")
+
+
 
 let 😲 = "Leah"
