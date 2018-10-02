@@ -129,6 +129,13 @@ class DrawViewController: NSViewController,NSToolbarDelegate,NSWindowDelegate{
         
     }
     
+    var locations:[CGPoint] = []
+    
+    override func mouseDown(with event: NSEvent) {
+       let point = self.drawView.convert(event.locationInWindow, to: nil)
+        locations.append(point)
+        drawView.updatePositions(positions: self.locations)
+    }
     
     override func mouseEntered(with event: NSEvent) {
         super.mouseEntered(with: event)
@@ -265,8 +272,7 @@ extension DrawViewController{
             
         } else {
 
-            settingsController = SettingsWindowController()
-            settingsController?.loadWindow()
+            settingsController = SettingsWindowController(windowNibName: NSNib.Name("Panel"), owner: self)
             settingsController!.window?.makeKeyAndOrderFront(self)
             
         }

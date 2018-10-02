@@ -18,6 +18,8 @@ class DrawView: NSView {
     var angleAdjust:CGFloat = CGFloat(Settings.initialAngle)
     var colorScheme = Settings.forest
     
+    var positions:[CGPoint] = []
+    
 //    override func makeBackingLayer() -> CALayer {
 //        print("will return layer")
 //        return CALayer()
@@ -26,6 +28,11 @@ class DrawView: NSView {
     public func updateColors(index:Int){
         colorScheme[ColorSchemeIndex(rawValue: index)!] = NSColorPanel.shared.color.cgColor
         print(colorScheme)
+        self.setNeedsDisplay(self.frame)
+    }
+    
+    public func updatePositions(positions:[CGPoint]){
+        self.positions = positions
         self.setNeedsDisplay(self.frame)
     }
     
@@ -63,10 +70,10 @@ class DrawView: NSView {
         context?.setLineWidth(5.0)
         context?.setLineCap(.round)
  
-        for i in 0...Settings.numberOfTrees{
-            let fixpoint = CGPoint(x: CGFloat(i) * self.frame.midX, y: self.frame.midY-CGFloat(Settings.initialLength)*1.5)
-            context?.move(to: fixpoint)
-            recursiveDraw(position:fixpoint, angle: 90,distance: distance, iteration: limit)
+        for position in positions{
+            //let fixpoint = CGPoint(x: CGFloat(i) * self.frame.midX, y: self.frame.midY-CGFloat(Settings.initialLength)*1.5)
+            context?.move(to: position)
+            recursiveDraw(position:position, angle: 90,distance: distance, iteration: limit)
         }
         
     }
