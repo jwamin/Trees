@@ -45,21 +45,23 @@ class DrawViewController: NSViewController,NSToolbarDelegate,NSWindowDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        //get delegate
         delegate = NSApp.delegate as? AppDelegate
 
         // Do view setup here.
         drawView = DrawView(frame: NSRect(origin: .zero, size: rect.size))
         drawView.bounds.origin = .zero
         drawView.autoresizingMask = [.width,.height]
-        
         view.addSubview(drawView)
-        print(drawView,view.subviews)
+    
+        //
         setupSliders()
         createToolbar()
         
+        locations.append(CGPoint(x: drawView.bounds.midX, y: (drawView.bounds.midY - CGFloat(Settings.initialLength*3/2))))
+        drawView.updatePositions(positions: locations)
         update(self)
-//        view.setNeedsDisplay(self.view.frame)
-//        drawView.setNeedsDisplay(self.view.frame)
+
     }
     
     @IBAction func printView(_ sender: Any) {
