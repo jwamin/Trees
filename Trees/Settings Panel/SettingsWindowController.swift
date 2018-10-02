@@ -15,9 +15,9 @@ class SettingsWindowController: NSWindowController, NSWindowDelegate {
         print("window loaded")
  
         self.showWindow(self)
-               print(window)
-        self.window?.makeKeyAndOrderFront(self)
         self.window?.title = "Advanced Options"
+        self.window?.makeKeyAndOrderFront(self)
+        
         // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
     }
     

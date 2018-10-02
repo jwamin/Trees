@@ -11,6 +11,8 @@ import TreeSettings
 
 class SettingsViewController : NSViewController{
     
+    var delegate:TreeProtocol?
+    
     var leftAngle:CGFloat = 20.0 {
         didSet{
             setAngleString()
@@ -137,15 +139,15 @@ class SettingsViewController : NSViewController{
     @IBOutlet weak var tipColorWell: NSColorWell!
     
     @IBAction func trunkColor(_ sender: Any) {
-        
+        scheme[.trunk] = trunkColorWell.color.cgColor
     }
     
     @IBAction func branchColor(_ sender: Any) {
-        
+        scheme[.branches] = branchColorWell.color.cgColor
     }
     
     @IBAction func tipColor(_ sender: Any) {
-        
+        scheme[.tips] = tipColorWell.color.cgColor
     }
     
     //Actions
@@ -188,9 +190,11 @@ class SettingsViewController : NSViewController{
         
     }
     
+    var scheme:[ColorSchemeIndex:CGColor] = Settings.forest
+    
     override func awakeFromNib() {
         print("hello from settings panel vc")
-        
+        self.view.window?.windowController?.contentViewController = self
         //setup angle controls
         angleSegment.setSelected(true, forSegment: 0)
         updateAngle()
@@ -199,32 +203,37 @@ class SettingsViewController : NSViewController{
         //setup length controls
         widthSegment.setSelected(true, forSegment: widthSegment.segmentCount-1)
         
-        trunkColorWell.color = NSColor(cgColor:Settings.forest[.trunk]!) ?? NSColor.white
-        branchColorWell.color = NSColor(cgColor:Settings.forest[.branches]!) ?? NSColor.white
-        tipColorWell.color = NSColor(cgColor:Settings.forest[.tips]!) ?? NSColor.white
+        trunkColorWell.color = NSColor(cgColor:scheme[.trunk]!)!
+        branchColorWell.color = NSColor(cgColor:scheme[.branches]!)!
+        tipColorWell.color = NSColor(cgColor:scheme[.tips]!)!
         
     }
     
     func setWidthString(){
         widthString = String(Int(currentWidth.rounded()))+"pt"
+        generateTree(self)
     }
     
     func setAngleString(){
 
         angleString = String(Int(currentAngle.rounded()))+"°"
-        
+        generateTree(self)
     }
     
     func setLengthString(){
         lengthString = String(Int(length.rounded()))+"pt"
+        generateTree(self)
     }
     
     
     @IBAction func generateTree(_ sender:Any){
         let tree = Tree(nil)
         tree.setAll(length: length, segments: segmentWidths, leftAngle: leftAngle, rightAngle: rightAngle)
-        print(tree)
+        tree.setColorScheme(newScheme: scheme)
+        delegate?.gotNewTree(tree: tree)
     }
     
     
 }
+
+

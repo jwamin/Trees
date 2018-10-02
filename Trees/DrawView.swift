@@ -20,13 +20,19 @@ class DrawView: NSView {
     
     var positions:[CGPoint] = []
     
+    var tree:Tree!
+    
 //    override func makeBackingLayer() -> CALayer {
 //        print("will return layer")
 //        return CALayer()
 //    }
     
+    public func updateTree(newTree:Tree){
+        tree = newTree
+    }
+    
     public func updateColors(index:Int){
-        colorScheme[ColorSchemeIndex(rawValue: index)!] = NSColorPanel.shared.color.cgColor
+        //colorScheme[ColorSchemeIndex(rawValue: index)!] = NSColorPanel.shared.color.cgColor
         print(colorScheme)
         self.setNeedsDisplay(self.frame)
     }
@@ -48,6 +54,7 @@ class DrawView: NSView {
     
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
+        tree = Tree(nil)
     }
     
     required init?(coder decoder: NSCoder) {

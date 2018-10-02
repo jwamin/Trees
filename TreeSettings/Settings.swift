@@ -127,3 +127,6 @@ public struct UpdatedSettings {
     }
 }
 
+public protocol TreeProtocol {
+    func gotNewTree(tree:Tree)
+}

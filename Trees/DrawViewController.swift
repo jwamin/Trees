@@ -152,18 +152,21 @@ class DrawViewController: NSViewController,NSToolbarDelegate,NSWindowDelegate{
     // MARK: Scroll wheel
     override func scrollWheel(with event: NSEvent) {
         super.scrollWheel(with: event)
-        if(angleSlider.hitTest(event.locationInWindow) != nil){
-            switch event.deltaY{
-            case let dy where dy > 0:
-                print("up")
-                angleSlider.floatValue += 1.0
-            case let dy where dy < 0:
-                print("down")
-                angleSlider.floatValue -= 1.0
-            default:
-                angleSlider.floatValue += 0
+        if(angleSlider != nil){
+            if(angleSlider.hitTest(event.locationInWindow) != nil){
+                switch event.deltaY{
+                case let dy where dy > 0:
+                    print("up")
+                    angleSlider.floatValue += 1.0
+                case let dy where dy < 0:
+                    print("down")
+                    angleSlider.floatValue -= 1.0
+                default:
+                    angleSlider.floatValue += 0
+                }
             }
         }
+
     }
     
     //Deinit methods
@@ -200,15 +203,15 @@ extension DrawViewController{
     }
     
     func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
-        return [myItem,branchesItem,trunkItem,NSToolbarItem.Identifier.flexibleSpace,settings]
+        return [/*myItem,branchesItem,trunkItem,*/NSToolbarItem.Identifier.flexibleSpace,settings]
     }
     
     func toolbarSelectableItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
-       return [myItem,branchesItem,trunkItem]
+       return [/*myItem,branchesItem,trunkItem*/ settings]
     }
     
     func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
-        return [myItem,branchesItem,trunkItem,NSToolbarItem.Identifier.flexibleSpace,settings]
+        return [/*myItem,branchesItem,trunkItem,*/NSToolbarItem.Identifier.flexibleSpace,settings]
     }
     
     func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
@@ -271,24 +274,36 @@ extension DrawViewController{
         if let settingsController = settingsController{
 
             settingsController.window?.makeKeyAndOrderFront(self)
+            updateWindowPosition()
             
         } else {
-            print("err hello")
+
             settingsController = SettingsWindowController(windowNibName: "Panel")
-            
-    
-            print(settingsController?.window)
-            settingsController?.window?.makeKeyAndOrderFront(self)
+            let vc = settingsController?.window?.contentViewController as! SettingsViewController
+            print(vc)
+            vc.delegate = self
             updateWindowPosition()
+            
         }
 
         
     }
     
+    //set position of advanced settigns window to the right of the main window
     func updateWindowPosition(){
         var point = NSPoint(x: (self.view.window?.frame.maxX)!, y: (self.view.window?.frame.minY)!)
         point.y = point.y - ((settingsController!.window!.frame.height - self.view.window!.frame.height) / 2)
         settingsController!.window?.setFrameOrigin(point)
     }
   
+}
+
+extension DrawViewController : TreeProtocol {
+    
+    func gotNewTree(tree: Tree) {
+        print("oh, hello")
+        drawView.updateTree(newTree:tree)
+    }
+    
+    
 }
