@@ -20,6 +20,10 @@ class SettingsWindowController: NSWindowController, NSWindowDelegate {
         // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
     }
     
+    override func windowTitle(forDocumentDisplayName displayName: String) -> String {
+        return "Advanced Options"
+    }
+    
     func windowShouldClose(_ sender: NSWindow) -> Bool {
         print("whaaa?")
         return true

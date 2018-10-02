@@ -32,12 +32,32 @@ public class Tree {
     
     private var colorScheme:[ColorSchemeIndex:CGColor] = Settings.forest
     
+    private var segmentWidths:[ColorSchemeIndex:CGFloat]?
+    
     public init(_ placeAtPoint:CGPoint?) {
         position = placeAtPoint
     }
     
     public func printColor(){
         print(self.colorScheme)
+    }
+    
+    public func setAll(length:CGFloat?,segments:[ColorSchemeIndex:CGFloat]?,leftAngle:CGFloat,rightAngle:CGFloat?){
+    
+        if let length = length {
+            trunkLength = Double(length)
+        }
+        
+        self.leftAngle = Double(leftAngle)
+        
+        if let rightAngle = rightAngle{
+            self.rightAngle = Int(rightAngle)
+        }
+        
+        if let segments = segments{
+            segmentWidths = segments
+        }
+    
     }
     
     //tweak colorscheme

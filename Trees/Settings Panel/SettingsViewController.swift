@@ -79,7 +79,7 @@ class SettingsViewController : NSViewController{
                 .tips: CGFloat(widthSlider!.floatValue)
             ]
         }
-        print(segmentWidths)
+        
     }
     
     func updateWidth(){
@@ -107,7 +107,6 @@ class SettingsViewController : NSViewController{
     
     @objc dynamic var length:CGFloat = 0.0{
         didSet{
-            print("updated")
             setLengthString()
         }
     }
@@ -117,7 +116,6 @@ class SettingsViewController : NSViewController{
     @objc dynamic var angleString:String = "90°"
     @objc dynamic var lengthString:String = "90pt"
     @objc dynamic var widthString:String = "10pt"
-    
     
     //Angle Controls
     @IBOutlet weak var angleSlider: NSSlider!
@@ -133,10 +131,8 @@ class SettingsViewController : NSViewController{
     @IBOutlet weak var widthSlider: NSSlider!
     @IBOutlet weak var widthLabel: NSTextField!
     
-    
     //Actions
     @IBAction func angleSegmentChanged(_ sender: Any) {
-        print("angle segment changed to:\(angleSegment.selectedSegment)")
         
         updateAngle()
         
@@ -201,5 +197,13 @@ class SettingsViewController : NSViewController{
     func setLengthString(){
         lengthString = String(Int(length.rounded()))+"pt"
     }
+    
+    
+    @IBAction func generateTree(_ sender:Any){
+        let tree = Tree(nil)
+        tree.setAll(length: length, segments: segmentWidths, leftAngle: leftAngle, rightAngle: rightAngle)
+        print(tree)
+    }
+    
     
 }

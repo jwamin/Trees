@@ -141,13 +141,11 @@ class DrawViewController: NSViewController,NSToolbarDelegate,NSWindowDelegate{
     
     override func mouseEntered(with event: NSEvent) {
         super.mouseEntered(with: event)
-        print("entered")
         NSCursor.crosshair.set()
     }
     
     override func mouseExited(with event: NSEvent) {
         super.mouseExited(with: event)
-         print("exited")
         NSCursor.arrow.set()
     }
     
