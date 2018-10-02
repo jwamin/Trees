@@ -131,6 +131,23 @@ class SettingsViewController : NSViewController{
     @IBOutlet weak var widthSlider: NSSlider!
     @IBOutlet weak var widthLabel: NSTextField!
     
+    
+    @IBOutlet weak var trunkColorWell: NSColorWell!
+    @IBOutlet weak var branchColorWell: NSColorWell!
+    @IBOutlet weak var tipColorWell: NSColorWell!
+    
+    @IBAction func trunkColor(_ sender: Any) {
+        
+    }
+    
+    @IBAction func branchColor(_ sender: Any) {
+        
+    }
+    
+    @IBAction func tipColor(_ sender: Any) {
+        
+    }
+    
     //Actions
     @IBAction func angleSegmentChanged(_ sender: Any) {
         
@@ -181,6 +198,10 @@ class SettingsViewController : NSViewController{
         
         //setup length controls
         widthSegment.setSelected(true, forSegment: widthSegment.segmentCount-1)
+        
+        trunkColorWell.color = NSColor(cgColor:Settings.forest[.trunk]!) ?? NSColor.white
+        branchColorWell.color = NSColor(cgColor:Settings.forest[.branches]!) ?? NSColor.white
+        tipColorWell.color = NSColor(cgColor:Settings.forest[.tips]!) ?? NSColor.white
         
     }
     

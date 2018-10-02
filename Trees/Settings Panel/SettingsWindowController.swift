@@ -9,12 +9,13 @@
 import Cocoa
 
 class SettingsWindowController: NSWindowController, NSWindowDelegate {
-
-
     
     override func windowDidLoad() {
         super.windowDidLoad()
         print("window loaded")
+ 
+        self.showWindow(self)
+               print(window)
         self.window?.makeKeyAndOrderFront(self)
         self.window?.title = "Advanced Options"
         // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
@@ -27,10 +28,6 @@ class SettingsWindowController: NSWindowController, NSWindowDelegate {
     func windowShouldClose(_ sender: NSWindow) -> Bool {
         print("whaaa?")
         return true
-    }
-    
-    override func awakeFromNib() {
-        print("get woke")
     }
     
     override func close() {

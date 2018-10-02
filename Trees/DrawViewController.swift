@@ -55,12 +55,12 @@ class DrawViewController: NSViewController,NSToolbarDelegate,NSWindowDelegate{
         view.addSubview(drawView)
     
         //
-        setupSliders()
+        //setupSliders()
         createToolbar()
         
         locations.append(CGPoint(x: drawView.bounds.midX, y: (drawView.bounds.midY - CGFloat(Settings.initialLength*3/2))))
         drawView.updatePositions(positions: locations)
-        update(self)
+        //update(self)
 
     }
     
@@ -177,9 +177,11 @@ class DrawViewController: NSViewController,NSToolbarDelegate,NSWindowDelegate{
     }
     
     func windowShouldClose(_ sender: NSWindow) -> Bool {
+        
         print("window closing")
         delegate.windowIsOpen = false
         return true
+        
     }
     
 }
@@ -271,15 +273,22 @@ extension DrawViewController{
             settingsController.window?.makeKeyAndOrderFront(self)
             
         } else {
-
-            settingsController = SettingsWindowController(windowNibName: NSNib.Name("Panel"), owner: self)
-            settingsController!.window?.makeKeyAndOrderFront(self)
+            print("err hello")
+            settingsController = SettingsWindowController(windowNibName: "Panel")
             
+    
+            print(settingsController?.window)
+            settingsController?.window?.makeKeyAndOrderFront(self)
+            updateWindowPosition()
         }
 
         
     }
     
-
+    func updateWindowPosition(){
+        var point = NSPoint(x: (self.view.window?.frame.maxX)!, y: (self.view.window?.frame.minY)!)
+        point.y = point.y - ((settingsController!.window!.frame.height - self.view.window!.frame.height) / 2)
+        settingsController!.window?.setFrameOrigin(point)
+    }
   
 }

@@ -6,7 +6,11 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner"/>
+        <customObject id="-2" userLabel="File's Owner" customClass="SettingsWindowController" customModule="Trees" customModuleProvider="target">
+            <connections>
+                <outlet property="window" destination="g71-81-YE1" id="c2c-ca-cPp"/>
+            </connections>
+        </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <viewController id="HUN-dc-yn9" userLabel="Popover View Controller" customClass="SettingsViewController" customModule="Trees" customModuleProvider="target">
@@ -14,8 +18,11 @@
                 <outlet property="angleLabel" destination="pzs-Qe-YOR" id="f51-Ar-xAD"/>
                 <outlet property="angleSegment" destination="pBo-4c-0OM" id="KHA-OC-PSV"/>
                 <outlet property="angleSlider" destination="css-2E-BOh" id="Vg3-zA-Qcm"/>
+                <outlet property="branchColorWell" destination="iqI-hR-Ohk" id="P3C-CF-3q0"/>
                 <outlet property="lengthLabel" destination="yYo-13-usJ" id="OWb-BA-GHf"/>
                 <outlet property="lengthSlider" destination="s0c-dW-Hd0" id="SEP-oj-H23"/>
+                <outlet property="tipColorWell" destination="E61-fq-pXI" id="fgs-9X-dX3"/>
+                <outlet property="trunkColorWell" destination="ZAq-VI-J8l" id="c2X-1h-9ew"/>
                 <outlet property="widthLabel" destination="jxX-bg-uCa" id="WHJ-Pf-ojt"/>
                 <outlet property="widthSegment" destination="Ep4-cT-hJR" id="Jmo-90-K6l"/>
                 <outlet property="widthSlider" destination="bHu-Mw-IaK" id="tuL-mF-HhV"/>
@@ -29,14 +36,15 @@
         <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" releasedWhenClosed="NO" frameAutosaveName="" animationBehavior="default" id="g71-81-YE1" customClass="SettingsPanel" customModule="Trees">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" utility="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="196" y="132" width="302" height="390"/>
+            <rect key="contentRect" x="196" y="132" width="302" height="466"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1177"/>
+            <value key="minSize" type="size" width="302" height="466"/>
             <view key="contentView" id="apD-ig-e4r">
-                <rect key="frame" x="0.0" y="0.0" width="302" height="390"/>
+                <rect key="frame" x="0.0" y="0.0" width="302" height="466"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <slider horizontalHuggingPriority="750" verticalHuggingPriority="750" id="css-2E-BOh">
-                        <rect key="frame" x="18" y="289" width="28" height="30"/>
+                        <rect key="frame" x="18" y="365" width="28" height="30"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <sliderCell key="cell" continuous="YES" alignment="left" minValue="20" maxValue="100" doubleValue="20" sliderType="circular" id="YAC-gK-oem"/>
                         <connections>
@@ -44,7 +52,7 @@
                         </connections>
                     </slider>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="pzs-Qe-YOR">
-                        <rect key="frame" x="50" y="283" width="27" height="29"/>
+                        <rect key="frame" x="50" y="359" width="27" height="29"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" lineBreakMode="clipping" title="90°" id="7gP-FJ-7bd">
                             <font key="font" metaFont="system"/>
@@ -56,7 +64,7 @@
                         </connections>
                     </textField>
                     <segmentedControl verticalHuggingPriority="750" id="pBo-4c-0OM">
-                        <rect key="frame" x="47" y="322" width="209" height="24"/>
+                        <rect key="frame" x="47" y="398" width="209" height="24"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                         <segmentedCell key="cell" borderStyle="border" alignment="left" segmentDistribution="fill" style="rounded" trackingMode="selectOne" id="Msx-la-nbA">
                             <font key="font" metaFont="system"/>
@@ -71,7 +79,7 @@
                         </connections>
                     </segmentedControl>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="jy7-95-E6a">
-                        <rect key="frame" x="18" y="267" width="134" height="17"/>
+                        <rect key="frame" x="18" y="343" width="134" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" lineBreakMode="clipping" title="Initial Length Adjust" id="QCM-Fb-S2q">
                             <font key="font" metaFont="systemBold"/>
@@ -80,7 +88,7 @@
                         </textFieldCell>
                     </textField>
                     <slider horizontalHuggingPriority="750" id="s0c-dW-Hd0">
-                        <rect key="frame" x="18" y="165" width="19" height="96"/>
+                        <rect key="frame" x="18" y="241" width="19" height="96"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <sliderCell key="cell" continuous="YES" alignment="left" minValue="1" maxValue="200" doubleValue="50" tickMarkPosition="right" sliderType="linear" id="epd-HD-dGb"/>
                         <connections>
@@ -88,7 +96,7 @@
                         </connections>
                     </slider>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="yYo-13-usJ">
-                        <rect key="frame" x="41" y="209" width="243" height="17"/>
+                        <rect key="frame" x="41" y="285" width="243" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" lineBreakMode="clipping" title="100pt" id="jw3-NV-zSa">
                             <font key="font" metaFont="system"/>
@@ -100,7 +108,7 @@
                         </connections>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="NY3-Eq-AlK">
-                        <rect key="frame" x="18" y="143" width="104" height="17"/>
+                        <rect key="frame" x="18" y="219" width="104" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" lineBreakMode="clipping" title="Segment Width" id="N7g-Fk-g5L">
                             <font key="font" metaFont="systemBold"/>
@@ -109,7 +117,7 @@
                         </textFieldCell>
                     </textField>
                     <segmentedControl verticalHuggingPriority="750" id="Ep4-cT-hJR">
-                        <rect key="frame" x="18" y="112" width="311" height="24"/>
+                        <rect key="frame" x="18" y="188" width="311" height="24"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                         <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="mK8-Rq-Ws2">
                             <font key="font" metaFont="system"/>
@@ -125,7 +133,7 @@
                         </connections>
                     </segmentedControl>
                     <slider verticalHuggingPriority="750" id="bHu-Mw-IaK">
-                        <rect key="frame" x="18" y="89" width="266" height="19"/>
+                        <rect key="frame" x="18" y="165" width="266" height="19"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                         <sliderCell key="cell" continuous="YES" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="XgG-7V-soB">
                             <connections>
@@ -133,20 +141,8 @@
                             </connections>
                         </sliderCell>
                     </slider>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="jxX-bg-uCa">
-                        <rect key="frame" x="117" y="66" width="69" height="17"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="7pt" id="zet-je-jD4">
-                            <font key="font" metaFont="system"/>
-                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                        <connections>
-                            <binding destination="HUN-dc-yn9" name="value" keyPath="self.widthString" id="IO9-wT-tSc"/>
-                        </connections>
-                    </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="Txf-ad-cc8">
-                        <rect key="frame" x="18" y="353" width="87" height="17"/>
+                        <rect key="frame" x="18" y="429" width="87" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" lineBreakMode="clipping" title="Angle Adjust" id="0g0-j3-qAD">
                             <font key="font" metaFont="systemBold"/>
@@ -165,9 +161,75 @@
                             <action selector="generateTree" target="HUN-dc-yn9" id="wKd-o3-e6G"/>
                         </connections>
                     </button>
+                    <colorWell id="ZAq-VI-J8l">
+                        <rect key="frame" x="20" y="116" width="44" height="23"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <connections>
+                            <action selector="trunkColor:" target="HUN-dc-yn9" id="uht-Nc-dM1"/>
+                        </connections>
+                    </colorWell>
+                    <colorWell id="iqI-hR-Ohk">
+                        <rect key="frame" x="20" y="85" width="44" height="23"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <connections>
+                            <action selector="branchColor:" target="HUN-dc-yn9" id="ePp-y0-uK4"/>
+                        </connections>
+                    </colorWell>
+                    <colorWell id="E61-fq-pXI">
+                        <rect key="frame" x="20" y="54" width="44" height="23"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <connections>
+                            <action selector="tipColor:" target="HUN-dc-yn9" id="JkG-9S-sZt"/>
+                        </connections>
+                    </colorWell>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="ImS-XF-Dpi">
+                        <rect key="frame" x="70" y="119" width="214" height="17"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" lineBreakMode="clipping" title="Trunk" id="Xvh-uL-tBH">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="jXw-os-OkK">
+                        <rect key="frame" x="70" y="88" width="214" height="17"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" lineBreakMode="clipping" title="Branches" id="3Pr-FJ-diF">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="9nn-f9-Zc3">
+                        <rect key="frame" x="70" y="57" width="214" height="17"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" lineBreakMode="clipping" title="Tips" id="NJB-dx-gG8">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="jxX-bg-uCa">
+                        <rect key="frame" x="18" y="142" width="266" height="17"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="7pt" id="zet-je-jD4">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                        <connections>
+                            <binding destination="HUN-dc-yn9" name="value" keyPath="self.widthString" id="IO9-wT-tSc"/>
+                        </connections>
+                    </textField>
                 </subviews>
             </view>
-            <point key="canvasLocation" x="-459" y="114"/>
+            <connections>
+                <outlet property="delegate" destination="-2" id="C0B-1C-iML"/>
+            </connections>
+            <point key="canvasLocation" x="-459" y="152"/>
         </window>
         <userDefaultsController representsSharedInstance="YES" id="glO-0h-Rtc"/>
     </objects>

@@ -15,6 +15,8 @@ class SettingsPanel : NSPanel {
     
     override func awakeFromNib() {
         print("hello from panel")
+        self.windowController?.showWindow(self)
+        self.makeKeyAndOrderFront(self)
     }
     
     deinit {
