@@ -1,8 +1,8 @@
 #  Trees
 
-![Alt text](/screenshots/shot.png?raw=true "Screenshot")
-
 ## `CoreGraphics` fractal trees for macOS with Swift.
+
+![Alt text](/screenshots/shot.png?raw=true "Screenshot")
 
 ### Features
 
