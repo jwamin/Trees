@@ -9,7 +9,7 @@
 import Cocoa
 import TreeSettings
 
-class DrawView: NSView {
+public class TreeDrawView: NSView {
 
     private var drawcount = 0
     
@@ -58,7 +58,7 @@ class DrawView: NSView {
         self.setNeedsDisplay(self.frame)
     }
     
-    override init(frame frameRect: NSRect) {
+    public override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
         tree = Tree(nil)
     }
@@ -67,12 +67,12 @@ class DrawView: NSView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func viewWillDraw() {
+    public override func viewWillDraw() {
         drawcount = 0
     }
     
     
-    override func draw(_ dirtyRect: NSRect) {
+    public override func draw(_ dirtyRect: NSRect) {
         
         super.draw(dirtyRect)
         print("drawing",frame)

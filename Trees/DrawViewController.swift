@@ -7,6 +7,7 @@
 //
 
 import AppKit
+import TreeDraw
 import TreeSettings
 
 class DrawViewController: NSViewController,NSToolbarDelegate,NSWindowDelegate{
@@ -15,7 +16,7 @@ class DrawViewController: NSViewController,NSToolbarDelegate,NSWindowDelegate{
 
     var delegate:AppDelegate!
     
-    var drawView:DrawView!
+    var drawView:TreeDrawView!
     
     var rect:NSRect!
     var angleSlider:NSSlider!
@@ -49,7 +50,7 @@ class DrawViewController: NSViewController,NSToolbarDelegate,NSWindowDelegate{
         delegate = NSApp.delegate as? AppDelegate
 
         // Do view setup here.
-        drawView = DrawView(frame: NSRect(origin: .zero, size: rect.size))
+        drawView = TreeDrawView(frame: NSRect(origin: .zero, size: rect.size))
         drawView.bounds.origin = .zero
         drawView.autoresizingMask = [.width,.height]
         view.addSubview(drawView)

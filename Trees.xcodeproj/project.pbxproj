@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3D22BBF021654458007C2470 /* TreeDraw.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D22BBEE21654458007C2470 /* TreeDraw.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3D22BBF321654458007C2470 /* TreeDraw.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D22BBEC21654458007C2470 /* TreeDraw.framework */; };
+		3D22BBF421654458007C2470 /* TreeDraw.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3D22BBEC21654458007C2470 /* TreeDraw.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3D22BBF821654464007C2470 /* TreeDrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7CE7F7215BD58D000E751C /* TreeDrawView.swift */; };
+		3D22BBFB2165448C007C2470 /* DrawViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7CE7F5215BD471000E751C /* DrawViewController.swift */; };
+		3D22BBFD2165450F007C2470 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D22BBFC2165450F007C2470 /* Helpers.swift */; };
 		3D7C621F2162A14A00F8C495 /* TreeSettings.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D7C621D2162A14A00F8C495 /* TreeSettings.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3D7C62222162A14A00F8C495 /* TreeSettings.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D7C621B2162A14A00F8C495 /* TreeSettings.framework */; };
 		3D7C62232162A14A00F8C495 /* TreeSettings.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3D7C621B2162A14A00F8C495 /* TreeSettings.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -14,8 +20,6 @@
 		3D7CE7E8215BD3E5000E751C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7CE7E7215BD3E5000E751C /* AppDelegate.swift */; };
 		3D7CE7EA215BD3E7000E751C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D7CE7E9215BD3E7000E751C /* Assets.xcassets */; };
 		3D7CE7ED215BD3E7000E751C /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D7CE7EB215BD3E7000E751C /* MainMenu.xib */; };
-		3D7CE7F6215BD471000E751C /* DrawViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7CE7F5215BD471000E751C /* DrawViewController.swift */; };
-		3D7CE7F8215BD58D000E751C /* DrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7CE7F7215BD58D000E751C /* DrawView.swift */; };
 		3DA7DA1B2163A8B400C1B693 /* SettingsPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA7DA1A2163A8B400C1B693 /* SettingsPanel.swift */; };
 		3DA7DA1D2163A8D600C1B693 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA7DA1C2163A8D600C1B693 /* SettingsViewController.swift */; };
 		3DA7DA212163B03100C1B693 /* Panel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DA7DA1F2163AF6600C1B693 /* Panel.xib */; };
@@ -24,6 +28,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		3D22BBF121654458007C2470 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3D7CE7DC215BD3E5000E751C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3D22BBEB21654458007C2470;
+			remoteInfo = TreeDraw;
+		};
 		3D7C62202162A14A00F8C495 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3D7CE7DC215BD3E5000E751C /* Project object */;
@@ -40,6 +51,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				3D22BBF421654458007C2470 /* TreeDraw.framework in Embed Frameworks */,
 				3D7C62232162A14A00F8C495 /* TreeSettings.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -48,6 +60,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3D22BBEC21654458007C2470 /* TreeDraw.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TreeDraw.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3D22BBEE21654458007C2470 /* TreeDraw.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TreeDraw.h; sourceTree = "<group>"; };
+		3D22BBEF21654458007C2470 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3D22BBFC2165450F007C2470 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Helpers.swift; path = TreeDraw/Helpers.swift; sourceTree = SOURCE_ROOT; };
 		3D22DDA5215C16920088561A /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		3D7C621B2162A14A00F8C495 /* TreeSettings.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TreeSettings.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D7C621D2162A14A00F8C495 /* TreeSettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TreeSettings.h; sourceTree = "<group>"; };
@@ -60,7 +76,7 @@
 		3D7CE7EE215BD3E7000E751C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3D7CE7EF215BD3E7000E751C /* Trees.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Trees.entitlements; sourceTree = "<group>"; };
 		3D7CE7F5215BD471000E751C /* DrawViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawViewController.swift; sourceTree = "<group>"; };
-		3D7CE7F7215BD58D000E751C /* DrawView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawView.swift; sourceTree = "<group>"; };
+		3D7CE7F7215BD58D000E751C /* TreeDrawView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeDrawView.swift; sourceTree = "<group>"; };
 		3D7CE7F9215BF791000E751C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		3DA7DA1A2163A8B400C1B693 /* SettingsPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPanel.swift; sourceTree = "<group>"; };
 		3DA7DA1C2163A8D600C1B693 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -72,6 +88,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		3D22BBE921654458007C2470 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3D7C62182162A14A00F8C495 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -83,6 +106,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D22BBF321654458007C2470 /* TreeDraw.framework in Frameworks */,
 				3D7C62222162A14A00F8C495 /* TreeSettings.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -90,6 +114,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3D22BBED21654458007C2470 /* TreeDraw */ = {
+			isa = PBXGroup;
+			children = (
+				3D22BBEE21654458007C2470 /* TreeDraw.h */,
+				3D22BBFC2165450F007C2470 /* Helpers.swift */,
+				3D7CE7F7215BD58D000E751C /* TreeDrawView.swift */,
+				3D22BBEF21654458007C2470 /* Info.plist */,
+			);
+			path = TreeDraw;
+			sourceTree = "<group>";
+		};
 		3D7C621C2162A14A00F8C495 /* TreeSettings */ = {
 			isa = PBXGroup;
 			children = (
@@ -107,6 +142,7 @@
 				3D7C62292162A18500F8C495 /* Main.playground */,
 				3D7CE7E6215BD3E5000E751C /* Trees */,
 				3D7C621C2162A14A00F8C495 /* TreeSettings */,
+				3D22BBED21654458007C2470 /* TreeDraw */,
 				3D7CE7E5215BD3E5000E751C /* Products */,
 				3DE234C7216523A800908186 /* screenshots */,
 			);
@@ -117,6 +153,7 @@
 			children = (
 				3D7CE7E4215BD3E5000E751C /* Trees.app */,
 				3D7C621B2162A14A00F8C495 /* TreeSettings.framework */,
+				3D22BBEC21654458007C2470 /* TreeDraw.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -126,7 +163,6 @@
 			children = (
 				3D7CE7E7215BD3E5000E751C /* AppDelegate.swift */,
 				3D7CE7F5215BD471000E751C /* DrawViewController.swift */,
-				3D7CE7F7215BD58D000E751C /* DrawView.swift */,
 				3D7CE7EB215BD3E7000E751C /* MainMenu.xib */,
 				3DA7DA192163A88C00C1B693 /* Settings Panel */,
 				3DB635DC215E929F00AF9956 /* Helpers.swift */,
@@ -152,6 +188,14 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		3D22BBE721654458007C2470 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3D22BBF021654458007C2470 /* TreeDraw.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3D7C62162162A14A00F8C495 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -163,6 +207,24 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		3D22BBEB21654458007C2470 /* TreeDraw */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3D22BBF721654458007C2470 /* Build configuration list for PBXNativeTarget "TreeDraw" */;
+			buildPhases = (
+				3D22BBE721654458007C2470 /* Headers */,
+				3D22BBE821654458007C2470 /* Sources */,
+				3D22BBE921654458007C2470 /* Frameworks */,
+				3D22BBEA21654458007C2470 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TreeDraw;
+			productName = TreeDraw;
+			productReference = 3D22BBEC21654458007C2470 /* TreeDraw.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		3D7C621A2162A14A00F8C495 /* TreeSettings */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3D7C62262162A14A00F8C495 /* Build configuration list for PBXNativeTarget "TreeSettings" */;
@@ -194,6 +256,7 @@
 			);
 			dependencies = (
 				3D7C62212162A14A00F8C495 /* PBXTargetDependency */,
+				3D22BBF221654458007C2470 /* PBXTargetDependency */,
 			);
 			name = Trees;
 			productName = Trees;
@@ -210,6 +273,9 @@
 				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = "Joss Manger";
 				TargetAttributes = {
+					3D22BBEB21654458007C2470 = {
+						CreatedOnToolsVersion = 10.0;
+					};
 					3D7C621A2162A14A00F8C495 = {
 						CreatedOnToolsVersion = 10.0;
 					};
@@ -233,11 +299,19 @@
 			targets = (
 				3D7CE7E3215BD3E5000E751C /* Trees */,
 				3D7C621A2162A14A00F8C495 /* TreeSettings */,
+				3D22BBEB21654458007C2470 /* TreeDraw */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		3D22BBEA21654458007C2470 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3D7C62192162A14A00F8C495 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -258,6 +332,15 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		3D22BBE821654458007C2470 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3D22BBF821654464007C2470 /* TreeDrawView.swift in Sources */,
+				3D22BBFD2165450F007C2470 /* Helpers.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3D7C62172162A14A00F8C495 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -270,12 +353,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3D7CE7F6215BD471000E751C /* DrawViewController.swift in Sources */,
+				3D22BBFB2165448C007C2470 /* DrawViewController.swift in Sources */,
 				3DB635DD215E929F00AF9956 /* Helpers.swift in Sources */,
 				3DA7DA1D2163A8D600C1B693 /* SettingsViewController.swift in Sources */,
 				3D7CE7E8215BD3E5000E751C /* AppDelegate.swift in Sources */,
 				3DB635DB215E6DCE00AF9956 /* SettingsWindowController.swift in Sources */,
-				3D7CE7F8215BD58D000E751C /* DrawView.swift in Sources */,
 				3DA7DA1B2163A8B400C1B693 /* SettingsPanel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -283,6 +365,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		3D22BBF221654458007C2470 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3D22BBEB21654458007C2470 /* TreeDraw */;
+			targetProxy = 3D22BBF121654458007C2470 /* PBXContainerItemProxy */;
+		};
 		3D7C62212162A14A00F8C495 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 3D7C621A2162A14A00F8C495 /* TreeSettings */;
@@ -302,6 +389,64 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		3D22BBF521654458007C2470 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = TreeDraw/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.jossy.TreeDraw;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		3D22BBF621654458007C2470 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = TreeDraw/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.jossy.TreeDraw;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		3D7C62242162A14A00F8C495 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -520,6 +665,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		3D22BBF721654458007C2470 /* Build configuration list for PBXNativeTarget "TreeDraw" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3D22BBF521654458007C2470 /* Debug */,
+				3D22BBF621654458007C2470 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		3D7C62262162A14A00F8C495 /* Build configuration list for PBXNativeTarget "TreeSettings" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

@@ -1,29 +1,23 @@
 import Cocoa
+import TreeDraw
 import TreeSettings
+import PlaygroundSupport
 
-//create tree object without a point of origin
-let mySettings = Tree(nil)
+//Create View Rect
+let rect = NSRect(origin: .zero, size: CGSize(width: 640, height: 480))
 
-//try setting non-color to colorscheme
-do{
-    try mySettings.setSchemeColor(index: .branches, color: "not a color")
-    mySettings.printColor()
-} catch {
-    print(error)
-}
+//Create View
+let dv = TreeDrawView(frame: rect)
 
-//try setting NSColor to colorscheme
-do{
-    try mySettings.setSchemeColor(index: .branches, color: NSColor.red)
-    mySettings.printColor()
-} catch {
-    print(error)
-}
+//create locations object
+var locations:[CGPoint] = [];
 
-//try setting CGColor to colorscheme
-do{
-    try mySettings.setSchemeColor(index: .branches, color: NSColor.blue.cgColor)
-    mySettings.printColor()
-} catch {
-    print(error)
-}
+//Add Tree Origin Position
+locations.append(CGPoint(x: dv.bounds.midX, y: (dv.bounds.midY - CGFloat(Settings.initialLength*3/2))))
+
+//Call View update
+dv.updatePositions(positions: locations)
+
+//Set View to current liveview
+PlaygroundPage.current.liveView = dv
+

@@ -41,6 +41,4 @@ let branchesItem:NSToolbarItem.Identifier = NSToolbarItem.Identifier(rawValue: "
 let trunkItem:NSToolbarItem.Identifier = NSToolbarItem.Identifier(rawValue: "trunkItem")
 let settings:NSToolbarItem.Identifier = NSToolbarItem.Identifier(rawValue: "settings")
 
-
-
 let 😲 = "Leah"
