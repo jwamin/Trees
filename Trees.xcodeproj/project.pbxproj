@@ -68,6 +68,7 @@
 		3DB635D7215E64B500AF9956 /* Design.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Design.xib; sourceTree = "<group>"; };
 		3DB635DA215E6DCE00AF9956 /* SettingsWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWindowController.swift; sourceTree = "<group>"; };
 		3DB635DC215E929F00AF9956 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		3DE234C7216523A800908186 /* screenshots */ = {isa = PBXFileReference; lastKnownFileType = folder; path = screenshots; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +108,7 @@
 				3D7CE7E6215BD3E5000E751C /* Trees */,
 				3D7C621C2162A14A00F8C495 /* TreeSettings */,
 				3D7CE7E5215BD3E5000E751C /* Products */,
+				3DE234C7216523A800908186 /* screenshots */,
 			);
 			sourceTree = "<group>";
 		};

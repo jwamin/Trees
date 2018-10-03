@@ -227,7 +227,7 @@ class SettingsViewController : NSViewController{
     
     
     @IBAction func generateTree(_ sender:Any){
-        print("updating",segmentWidths)
+        print("updating",segmentWidths as Any)
         let tree = Tree(nil)
         tree.setAll(length: length, segments: segmentWidths, leftAngle: leftAngle, rightAngle: rightAngle)
         tree.setColorScheme(newScheme: scheme)
