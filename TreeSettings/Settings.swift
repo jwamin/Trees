@@ -26,7 +26,7 @@ public class Tree {
     var trunkWidth = Settings.initialWidth
     
     var leftAngle = Settings.initialAngle
-    var rightAngle:Int?
+    var rightAngle:Double?
     
     var branches = Settings.recursionLimit
     
@@ -51,13 +51,35 @@ public class Tree {
         self.leftAngle = Double(leftAngle)
         
         if let rightAngle = rightAngle{
-            self.rightAngle = Int(rightAngle)
+            self.rightAngle = Double(rightAngle)
         }
         
         if let segments = segments{
             segmentWidths = segments
         }
     
+    }
+    
+    public func getAngle()->Double{
+        return leftAngle
+    }
+    
+    public func getRightAngleIfAny()->Double?{
+        return rightAngle
+    }
+    
+    public func getColorScheme()->[ColorSchemeIndex:CGColor]{
+        return colorScheme
+    }
+    
+    public func getSegementWidths()->[ColorSchemeIndex:CGFloat]?{
+        
+        return segmentWidths
+        
+    }
+    
+    public func getLength()->CGFloat{
+        return CGFloat(trunkLength)
     }
     
     //tweak colorscheme

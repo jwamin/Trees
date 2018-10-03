@@ -91,7 +91,7 @@
                     <slider horizontalHuggingPriority="750" id="s0c-dW-Hd0">
                         <rect key="frame" x="18" y="242" width="19" height="96"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <sliderCell key="cell" continuous="YES" alignment="left" minValue="1" maxValue="200" doubleValue="50" tickMarkPosition="right" sliderType="linear" id="epd-HD-dGb"/>
+                        <sliderCell key="cell" continuous="YES" alignment="left" minValue="1" maxValue="200" doubleValue="90" tickMarkPosition="right" sliderType="linear" id="epd-HD-dGb"/>
                         <connections>
                             <binding destination="HUN-dc-yn9" name="value" keyPath="self.length" id="Eoq-fO-2xa"/>
                         </connections>
@@ -118,7 +118,7 @@
                         </textFieldCell>
                     </textField>
                     <segmentedControl verticalHuggingPriority="750" id="Ep4-cT-hJR">
-                        <rect key="frame" x="18" y="189" width="285" height="24"/>
+                        <rect key="frame" x="27" y="189" width="267" height="24"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                         <segmentedCell key="cell" borderStyle="border" alignment="left" segmentDistribution="fill" style="rounded" trackingMode="selectOne" id="mK8-Rq-Ws2">
                             <font key="font" metaFont="system"/>
@@ -126,7 +126,7 @@
                                 <segment label="Trunk"/>
                                 <segment label="Branches" selected="YES" tag="1"/>
                                 <segment label="Tips"/>
-                                <segment label="Normal"/>
+                                <segment label="Natural"/>
                             </segments>
                         </segmentedCell>
                         <connections>
@@ -136,7 +136,7 @@
                     <slider verticalHuggingPriority="750" id="bHu-Mw-IaK">
                         <rect key="frame" x="18" y="166" width="284" height="19"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                        <sliderCell key="cell" continuous="YES" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="XgG-7V-soB">
+                        <sliderCell key="cell" continuous="YES" state="on" alignment="left" minValue="1" maxValue="20" doubleValue="1" tickMarkPosition="above" sliderType="linear" id="XgG-7V-soB">
                             <connections>
                                 <binding destination="HUN-dc-yn9" name="value" keyPath="self.currentWidth" id="idN-jM-no7"/>
                             </connections>
@@ -154,7 +154,7 @@
                     <button verticalHuggingPriority="750" id="txb-Us-7f1">
                         <rect key="frame" x="89" y="13" width="144" height="32"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                        <buttonCell key="cell" type="push" title="Generate Tree" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="6c0-Nd-ZsF">
+                        <buttonCell key="cell" type="push" title="Update Colors" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="6c0-Nd-ZsF">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>

@@ -50,7 +50,7 @@ class SettingsViewController : NSViewController{
         }
     }
     
-    @objc dynamic var currentWidth:CGFloat = 90.0{
+    @objc dynamic var currentWidth:CGFloat = 2.0{
         didSet{
             //currentAngleUpdated
             if let _ = segmentWidths{
@@ -60,7 +60,7 @@ class SettingsViewController : NSViewController{
             case 1:
                 segmentWidths![.branches] = currentWidth
             case 2:
-                segmentWidths![.trunk] = currentWidth
+                segmentWidths![.tips] = currentWidth
             default:
                 print("waaa")
             }
@@ -107,7 +107,7 @@ class SettingsViewController : NSViewController{
         setWidthString()
     }
     
-    @objc dynamic var length:CGFloat = 0.0{
+    @objc dynamic var length:CGFloat = 90.0{
         didSet{
             setLengthString()
         }
@@ -227,6 +227,7 @@ class SettingsViewController : NSViewController{
     
     
     @IBAction func generateTree(_ sender:Any){
+        print("updating",segmentWidths)
         let tree = Tree(nil)
         tree.setAll(length: length, segments: segmentWidths, leftAngle: leftAngle, rightAngle: rightAngle)
         tree.setColorScheme(newScheme: scheme)

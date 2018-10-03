@@ -16,11 +16,16 @@ class DrawView: NSView {
     var distance:CGFloat = CGFloat(Settings.initialLength)
     var limit:Int = Settings.recursionLimit
     var angleAdjust:CGFloat = CGFloat(Settings.initialAngle)
+    var rightAdjust:CGFloat?
     var colorScheme = Settings.forest
     
     var positions:[CGPoint] = []
     
-    var tree:Tree!
+    var tree:Tree! {
+        didSet{
+            setNeedsDisplay(self.frame)
+        }
+    }
     
 //    override func makeBackingLayer() -> CALayer {
 //        print("will return layer")
@@ -28,6 +33,7 @@ class DrawView: NSView {
 //    }
     
     public func updateTree(newTree:Tree){
+        print("updating tree")
         tree = newTree
     }
     
@@ -65,6 +71,7 @@ class DrawView: NSView {
         drawcount = 0
     }
     
+    
     override func draw(_ dirtyRect: NSRect) {
         
         super.draw(dirtyRect)
@@ -77,10 +84,20 @@ class DrawView: NSView {
         context?.setLineWidth(5.0)
         context?.setLineCap(.round)
  
+        colorScheme = tree.getColorScheme()
+        
+        angleAdjust = CGFloat(tree.getAngle())
+        
+        if let rightAngle = tree.getRightAngleIfAny(){
+            rightAdjust = CGFloat(rightAngle)
+        } else {
+            rightAdjust = angleAdjust
+        }
+        
         for position in positions{
             //let fixpoint = CGPoint(x: CGFloat(i) * self.frame.midX, y: self.frame.midY-CGFloat(Settings.initialLength)*1.5)
             context?.move(to: position)
-            recursiveDraw(position:position, angle: 90,distance: distance, iteration: limit)
+            recursiveDraw(position:position, angle: 90,distance: tree.getLength(), iteration: limit)
         }
         
     }
@@ -116,23 +133,40 @@ class DrawView: NSView {
         path.move(to: position)
         
         //set adjusted line width for path
-        context?.setLineWidth(distance/10/3*2) // reduce the line thickness as we get further up the tree
+         // reduce the line thickness as we get further up the tree
         
         //line to new position
         path.addLine(to: newposition)
+        
+        var width = distance / 10 / 3 * 2
+        
+        let segementsSet = tree.getSegementWidths()
         
         //deduce colorscheme color for path
         switch iteration {
         case let trunk where (trunk == limit || trunk == limit-1):
             //bottom of tree, allmost all iterations left
             context?.setStrokeColor(colorScheme[.trunk] ?? Settings.white)
+            if let segments = segementsSet {
+                width = segments[.trunk] ?? width
+            }
         case 1:
             //tips of the tree, only one recursions left, will exit on next call
             context?.setStrokeColor(colorScheme[.tips] ?? Settings.white)
+            if let segments = segementsSet {
+                width = segments[.tips] ?? width
+            }
         default:
             //set all other draws to middle color
             context?.setStrokeColor(colorScheme[.branches] ?? Settings.white)
+            if let segments = segementsSet {
+                width = segments[.branches] ?? width
+            }
         }
+        
+        
+        
+        context?.setLineWidth(width)
         
         //draw
         context?.beginPath()
@@ -144,7 +178,7 @@ class DrawView: NSView {
         
         //2 calls to same recursive function, adjusted angle creates mirrored divergence from originally passed position
         recursiveDraw(position: newposition, angle: angle-angleAdjust, distance: newDistance, iteration: newiteration)
-        recursiveDraw(position: newposition, angle: angle+angleAdjust, distance: newDistance, iteration: newiteration)
+        recursiveDraw(position: newposition, angle: angle+rightAdjust!, distance: newDistance, iteration: newiteration)
         
     }
     
