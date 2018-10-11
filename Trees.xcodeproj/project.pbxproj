@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3D1B4A42216FF530004FB774 /* TreeSettings.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D7C621B2162A14A00F8C495 /* TreeSettings.framework */; };
 		3D22BBF021654458007C2470 /* TreeDraw.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D22BBEE21654458007C2470 /* TreeDraw.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3D22BBF321654458007C2470 /* TreeDraw.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D22BBEC21654458007C2470 /* TreeDraw.framework */; };
 		3D22BBF421654458007C2470 /* TreeDraw.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3D22BBEC21654458007C2470 /* TreeDraw.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -92,6 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D1B4A42216FF530004FB774 /* TreeSettings.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,6 +116,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3D1B4A41216FF530004FB774 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		3D22BBED21654458007C2470 /* TreeDraw */ = {
 			isa = PBXGroup;
 			children = (
@@ -145,6 +154,7 @@
 				3D22BBED21654458007C2470 /* TreeDraw */,
 				3D7CE7E5215BD3E5000E751C /* Products */,
 				3DE234C7216523A800908186 /* screenshots */,
+				3D1B4A41216FF530004FB774 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
