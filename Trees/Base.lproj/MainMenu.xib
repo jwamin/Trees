@@ -57,7 +57,7 @@
                             </menuItem>
                             <menuItem title="Print…" keyEquivalent="p" id="aTl-1u-JFS">
                                 <connections>
-                                    <action selector="printView:" target="-1" id="KeE-l5-8be"/>
+                                    <action selector="printDocument:" target="-1" id="iMU-kj-cbE"/>
                                 </connections>
                             </menuItem>
                         </items>

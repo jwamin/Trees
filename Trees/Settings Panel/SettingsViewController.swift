@@ -13,7 +13,13 @@ class SettingsViewController : NSViewController{
     
     var delegate:TreeProtocol?
     
-    var leftAngle:CGFloat = 20.0 {
+    var scheme:[ColorSchemeIndex:CGColor] = Settings.forest {
+        didSet{
+            generateTree(self)
+        }
+    }
+    
+    var leftAngle:CGFloat = CGFloat(Settings.initialAngle) {
         didSet{
             setAngleString()
         }
@@ -25,7 +31,14 @@ class SettingsViewController : NSViewController{
         }
     }
     
-    @objc dynamic var currentAngle:CGFloat = 90.0{
+    @objc dynamic var length:CGFloat = CGFloat(Settings.initialLength) {
+        didSet{
+            setLengthString()
+        }
+    }
+    
+    
+    @objc dynamic var currentAngle:CGFloat = CGFloat(Settings.initialAngle){
         didSet{
             //currentAngleUpdated
             
@@ -50,7 +63,7 @@ class SettingsViewController : NSViewController{
         }
     }
     
-    @objc dynamic var currentWidth:CGFloat = 2.0{
+    @objc dynamic var currentWidth:CGFloat = CGFloat(Settings.initialWidth){
         didSet{
             //currentAngleUpdated
             if let _ = segmentWidths{
@@ -71,6 +84,77 @@ class SettingsViewController : NSViewController{
         }
     }
     
+    
+    //Interface Builder
+    
+    //Label Strings = Bindings
+    @objc dynamic var angleString:String = "90°"
+    @objc dynamic var lengthString:String = "90pt"
+    @objc dynamic var widthString:String = "10pt"
+    
+    //Angle Controls
+    @IBOutlet weak var angleSlider: NSSlider!
+    @IBOutlet weak var angleSegment: NSSegmentedControl!
+    @IBOutlet weak var angleLabel: NSTextField!
+    
+    //Length Controls
+    @IBOutlet weak var lengthSlider: NSSlider!
+    @IBOutlet weak var lengthLabel: NSTextField!
+    
+    //Width Controls
+    @IBOutlet weak var widthSegment: NSSegmentedControl!
+    @IBOutlet weak var widthSlider: NSSlider!
+    @IBOutlet weak var widthLabel: NSTextField!
+    
+    //Color Wells
+    @IBOutlet weak var trunkColorWell: NSColorWell!
+    @IBOutlet weak var branchColorWell: NSColorWell!
+    @IBOutlet weak var tipColorWell: NSColorWell!
+    
+    //Actions
+    //(Using Actions instead of bindings)
+    
+    @IBAction func trunkColor(_ sender: Any) {
+        scheme[.trunk] = trunkColorWell.color.cgColor
+    }
+    
+    @IBAction func branchColor(_ sender: Any) {
+        scheme[.branches] = branchColorWell.color.cgColor
+    }
+    
+    @IBAction func tipColor(_ sender: Any) {
+        scheme[.tips] = tipColorWell.color.cgColor
+    }
+    
+    
+    @IBAction func angleSegmentChanged(_ sender: Any) {
+        updateAngle()
+    }
+    
+    @IBAction func widthSegmentChanged(_ sender: Any) {
+        
+        print("width segment changed to:\(widthSegment.selectedSegment)")
+        if(widthSegment.selectedSegment == 3){
+            print("setting disabled")
+            widthSlider.isEnabled = false
+        } else {
+            widthSlider.isEnabled = true
+        }
+        updateWidth()
+        
+    }
+    
+    @IBAction func generateTree(_ sender:Any){
+        print("updating",segmentWidths as Any)
+        let tree = Tree(nil)
+        tree.setAll(length: length, segments: segmentWidths, leftAngle: leftAngle, rightAngle: rightAngle)
+        tree.setColorScheme(newScheme: scheme)
+        delegate?.gotNewTree(tree: tree)
+    }
+
+    
+    //Setup functions
+    
     func setupInitialSegments(){
         
         if (segmentWidths == nil){
@@ -83,6 +167,24 @@ class SettingsViewController : NSViewController{
         }
         
     }
+    
+    func setWidthString(){
+        widthString = String(Int(currentWidth.rounded()))+"pt"
+        generateTree(self)
+    }
+    
+    func setAngleString(){
+        
+        angleString = String(Int(currentAngle.rounded()))+"°"
+        generateTree(self)
+    }
+    
+    func setLengthString(){
+        lengthString = String(Int(length.rounded()))+"pt"
+        generateTree(self)
+    }
+    
+    //Update Functions
     
     func updateWidth(){
         switch(widthSegment.selectedSegment){
@@ -107,56 +209,6 @@ class SettingsViewController : NSViewController{
         setWidthString()
     }
     
-    @objc dynamic var length:CGFloat = 90.0{
-        didSet{
-            setLengthString()
-        }
-    }
-    
-    
-    //Label Stringss
-    @objc dynamic var angleString:String = "90°"
-    @objc dynamic var lengthString:String = "90pt"
-    @objc dynamic var widthString:String = "10pt"
-    
-    //Angle Controls
-    @IBOutlet weak var angleSlider: NSSlider!
-    @IBOutlet weak var angleSegment: NSSegmentedControl!
-    @IBOutlet weak var angleLabel: NSTextField!
-    
-    //Length Controls
-    @IBOutlet weak var lengthSlider: NSSlider!
-    @IBOutlet weak var lengthLabel: NSTextField!
-    
-    //Width Controls
-    @IBOutlet weak var widthSegment: NSSegmentedControl!
-    @IBOutlet weak var widthSlider: NSSlider!
-    @IBOutlet weak var widthLabel: NSTextField!
-    
-    
-    @IBOutlet weak var trunkColorWell: NSColorWell!
-    @IBOutlet weak var branchColorWell: NSColorWell!
-    @IBOutlet weak var tipColorWell: NSColorWell!
-    
-    @IBAction func trunkColor(_ sender: Any) {
-        scheme[.trunk] = trunkColorWell.color.cgColor
-    }
-    
-    @IBAction func branchColor(_ sender: Any) {
-        scheme[.branches] = branchColorWell.color.cgColor
-    }
-    
-    @IBAction func tipColor(_ sender: Any) {
-        scheme[.tips] = tipColorWell.color.cgColor
-    }
-    
-    //Actions
-    @IBAction func angleSegmentChanged(_ sender: Any) {
-        
-        updateAngle()
-        
-    }
-    
     func updateAngle(){
         switch(angleSegment.selectedSegment){
         case 0:
@@ -175,22 +227,16 @@ class SettingsViewController : NSViewController{
         }
     }
     
+    
+    
+    //Reset Functions
+    
     func teardownSegements(){
         segmentWidths = nil
     }
-    
- 
-    
 
     
-    @IBAction func widthSegmentChanged(_ sender: Any) {
-        print("width segment changed to:\(widthSegment.selectedSegment)")
-        
-        updateWidth()
-        
-    }
-    
-    var scheme:[ColorSchemeIndex:CGColor] = Settings.forest
+    //Lifecycle
     
     override func awakeFromNib() {
         print("hello from settings panel vc")
@@ -202,36 +248,12 @@ class SettingsViewController : NSViewController{
         
         //setup length controls
         widthSegment.setSelected(true, forSegment: widthSegment.segmentCount-1)
+        widthSlider.isEnabled = false
         
         trunkColorWell.color = NSColor(cgColor:scheme[.trunk]!)!
         branchColorWell.color = NSColor(cgColor:scheme[.branches]!)!
         tipColorWell.color = NSColor(cgColor:scheme[.tips]!)!
         
-    }
-    
-    func setWidthString(){
-        widthString = String(Int(currentWidth.rounded()))+"pt"
-        generateTree(self)
-    }
-    
-    func setAngleString(){
-
-        angleString = String(Int(currentAngle.rounded()))+"°"
-        generateTree(self)
-    }
-    
-    func setLengthString(){
-        lengthString = String(Int(length.rounded()))+"pt"
-        generateTree(self)
-    }
-    
-    
-    @IBAction func generateTree(_ sender:Any){
-        print("updating",segmentWidths as Any)
-        let tree = Tree(nil)
-        tree.setAll(length: length, segments: segmentWidths, leftAngle: leftAngle, rightAngle: rightAngle)
-        tree.setColorScheme(newScheme: scheme)
-        delegate?.gotNewTree(tree: tree)
     }
     
     

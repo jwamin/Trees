@@ -37,15 +37,15 @@
         <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" releasedWhenClosed="NO" frameAutosaveName="" animationBehavior="default" id="g71-81-YE1" customClass="SettingsPanel" customModule="Trees">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" utility="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="196" y="132" width="320" height="467"/>
+            <rect key="contentRect" x="196" y="132" width="320" height="432"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1177"/>
-            <value key="minSize" type="size" width="302" height="466"/>
+            <value key="minSize" type="size" width="302" height="432"/>
             <view key="contentView" id="apD-ig-e4r">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="467"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="432"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <slider horizontalHuggingPriority="750" verticalHuggingPriority="750" id="css-2E-BOh">
-                        <rect key="frame" x="18" y="366" width="28" height="30"/>
+                        <rect key="frame" x="18" y="331" width="28" height="30"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <sliderCell key="cell" continuous="YES" alignment="left" minValue="20" maxValue="100" doubleValue="20" sliderType="circular" id="YAC-gK-oem"/>
                         <connections>
@@ -53,7 +53,7 @@
                         </connections>
                     </slider>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="pzs-Qe-YOR">
-                        <rect key="frame" x="50" y="360" width="27" height="29"/>
+                        <rect key="frame" x="50" y="325" width="27" height="29"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" lineBreakMode="clipping" title="90°" id="7gP-FJ-7bd">
                             <font key="font" metaFont="system"/>
@@ -65,7 +65,7 @@
                         </connections>
                     </textField>
                     <segmentedControl verticalHuggingPriority="750" id="pBo-4c-0OM">
-                        <rect key="frame" x="47" y="399" width="235" height="24"/>
+                        <rect key="frame" x="47" y="364" width="235" height="24"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                         <segmentedCell key="cell" borderStyle="border" alignment="left" segmentDistribution="fill" style="rounded" trackingMode="selectOne" id="Msx-la-nbA">
                             <font key="font" metaFont="system"/>
@@ -80,7 +80,7 @@
                         </connections>
                     </segmentedControl>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="jy7-95-E6a">
-                        <rect key="frame" x="18" y="344" width="134" height="17"/>
+                        <rect key="frame" x="18" y="309" width="134" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" lineBreakMode="clipping" title="Initial Length Adjust" id="QCM-Fb-S2q">
                             <font key="font" metaFont="systemBold"/>
@@ -89,7 +89,7 @@
                         </textFieldCell>
                     </textField>
                     <slider horizontalHuggingPriority="750" id="s0c-dW-Hd0">
-                        <rect key="frame" x="18" y="242" width="19" height="96"/>
+                        <rect key="frame" x="18" y="207" width="19" height="96"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <sliderCell key="cell" continuous="YES" alignment="left" minValue="1" maxValue="200" doubleValue="90" tickMarkPosition="right" sliderType="linear" id="epd-HD-dGb"/>
                         <connections>
@@ -97,7 +97,7 @@
                         </connections>
                     </slider>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="yYo-13-usJ">
-                        <rect key="frame" x="41" y="286" width="243" height="17"/>
+                        <rect key="frame" x="41" y="251" width="243" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" lineBreakMode="clipping" title="100pt" id="jw3-NV-zSa">
                             <font key="font" metaFont="system"/>
@@ -109,7 +109,7 @@
                         </connections>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="NY3-Eq-AlK">
-                        <rect key="frame" x="18" y="220" width="104" height="17"/>
+                        <rect key="frame" x="18" y="185" width="104" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" lineBreakMode="clipping" title="Segment Width" id="N7g-Fk-g5L">
                             <font key="font" metaFont="systemBold"/>
@@ -118,7 +118,7 @@
                         </textFieldCell>
                     </textField>
                     <segmentedControl verticalHuggingPriority="750" id="Ep4-cT-hJR">
-                        <rect key="frame" x="27" y="189" width="267" height="24"/>
+                        <rect key="frame" x="27" y="154" width="267" height="24"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                         <segmentedCell key="cell" borderStyle="border" alignment="left" segmentDistribution="fill" style="rounded" trackingMode="selectOne" id="mK8-Rq-Ws2">
                             <font key="font" metaFont="system"/>
@@ -134,16 +134,16 @@
                         </connections>
                     </segmentedControl>
                     <slider verticalHuggingPriority="750" id="bHu-Mw-IaK">
-                        <rect key="frame" x="18" y="166" width="284" height="19"/>
+                        <rect key="frame" x="18" y="131" width="284" height="19"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                        <sliderCell key="cell" continuous="YES" state="on" alignment="left" minValue="1" maxValue="20" doubleValue="1" tickMarkPosition="above" sliderType="linear" id="XgG-7V-soB">
+                        <sliderCell key="cell" continuous="YES" enabled="NO" state="on" alignment="left" minValue="1" maxValue="20" doubleValue="1" tickMarkPosition="above" sliderType="linear" id="XgG-7V-soB">
                             <connections>
                                 <binding destination="HUN-dc-yn9" name="value" keyPath="self.currentWidth" id="idN-jM-no7"/>
                             </connections>
                         </sliderCell>
                     </slider>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="Txf-ad-cc8">
-                        <rect key="frame" x="18" y="430" width="87" height="17"/>
+                        <rect key="frame" x="18" y="395" width="87" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" lineBreakMode="clipping" title="Angle Adjust" id="0g0-j3-qAD">
                             <font key="font" metaFont="systemBold"/>
@@ -151,19 +151,8 @@
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <button verticalHuggingPriority="750" id="txb-Us-7f1">
-                        <rect key="frame" x="89" y="13" width="144" height="32"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                        <buttonCell key="cell" type="push" title="Update Colors" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="6c0-Nd-ZsF">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="generateTree" target="HUN-dc-yn9" id="wKd-o3-e6G"/>
-                        </connections>
-                    </button>
                     <colorWell id="ZAq-VI-J8l">
-                        <rect key="frame" x="20" y="117" width="44" height="23"/>
+                        <rect key="frame" x="20" y="82" width="44" height="23"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <connections>
@@ -171,7 +160,7 @@
                         </connections>
                     </colorWell>
                     <colorWell id="iqI-hR-Ohk">
-                        <rect key="frame" x="20" y="86" width="44" height="23"/>
+                        <rect key="frame" x="20" y="51" width="44" height="23"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <connections>
@@ -179,7 +168,7 @@
                         </connections>
                     </colorWell>
                     <colorWell id="E61-fq-pXI">
-                        <rect key="frame" x="20" y="55" width="44" height="23"/>
+                        <rect key="frame" x="20" y="20" width="44" height="23"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <connections>
@@ -187,7 +176,7 @@
                         </connections>
                     </colorWell>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="ImS-XF-Dpi">
-                        <rect key="frame" x="70" y="120" width="232" height="17"/>
+                        <rect key="frame" x="70" y="85" width="232" height="17"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" lineBreakMode="clipping" title="Trunk" id="Xvh-uL-tBH">
                             <font key="font" metaFont="system"/>
@@ -196,7 +185,7 @@
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="jXw-os-OkK">
-                        <rect key="frame" x="70" y="89" width="232" height="17"/>
+                        <rect key="frame" x="70" y="54" width="232" height="17"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" lineBreakMode="clipping" title="Branches" id="3Pr-FJ-diF">
                             <font key="font" metaFont="system"/>
@@ -205,7 +194,7 @@
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="9nn-f9-Zc3">
-                        <rect key="frame" x="70" y="58" width="232" height="17"/>
+                        <rect key="frame" x="70" y="23" width="232" height="17"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" lineBreakMode="clipping" title="Tips" id="NJB-dx-gG8">
                             <font key="font" metaFont="system"/>
@@ -214,7 +203,7 @@
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="jxX-bg-uCa">
-                        <rect key="frame" x="18" y="143" width="284" height="17"/>
+                        <rect key="frame" x="18" y="108" width="284" height="17"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="7pt" id="zet-je-jD4">
                             <font key="font" metaFont="system"/>
@@ -222,6 +211,7 @@
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                         <connections>
+                            <binding destination="HUN-dc-yn9" name="enabled" keyPath="self.widthSlider.isEnabled" id="HaR-rh-ThU"/>
                             <binding destination="HUN-dc-yn9" name="value" keyPath="self.widthString" id="IO9-wT-tSc"/>
                         </connections>
                     </textField>
@@ -230,7 +220,7 @@
             <connections>
                 <outlet property="delegate" destination="-2" id="C0B-1C-iML"/>
             </connections>
-            <point key="canvasLocation" x="-484" y="132.5"/>
+            <point key="canvasLocation" x="-484" y="115"/>
         </window>
         <userDefaultsController representsSharedInstance="YES" id="glO-0h-Rtc"/>
     </objects>

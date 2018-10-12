@@ -8,11 +8,25 @@
 
 import Cocoa
 
+
+//Color Scheme model
+
 public enum ColorSchemeIndex:Int{
     case trunk = 0
     case branches
     case tips
 }
+
+//struct ColorScheme {
+//    private var trunk:CGColor!
+//    private var branches:CGColor!
+//    private var tips:CGColor!
+//
+//    public var
+//
+//}
+
+
 
 //Tree model
 public class Tree {
@@ -139,6 +153,7 @@ public class Settings{
     // do init
     
 }
+
 
 public struct UpdatedSettings {
    public let angle:Float

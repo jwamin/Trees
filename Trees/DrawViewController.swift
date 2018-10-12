@@ -64,12 +64,11 @@ class DrawViewController: NSViewController,NSToolbarDelegate,NSWindowDelegate{
         //update(self)
 
     }
-    
-    @IBAction func printView(_ sender: Any) {
-         NSPrintOperation.init(view: self.drawView).run()
+   
+    @objc @IBAction func printDocument(_ sender: AnyObject) {
+        print("hi!")
+        NSPrintOperation.init(view: self.drawView).run()
     }
-   
-   
     
     func setupSliders(){
         
@@ -204,15 +203,15 @@ extension DrawViewController{
     }
     
     func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
-        return [/*myItem,branchesItem,trunkItem,*/NSToolbarItem.Identifier.flexibleSpace,settings]
+        return [/*myItem,branchesItem,trunkItem,*/NSToolbarItem.Identifier.flexibleSpace,NSToolbarItem.Identifier.print,settings]
     }
     
     func toolbarSelectableItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
-       return [/*myItem,branchesItem,trunkItem*/ settings]
+       return [/*myItem,branchesItem,trunkItem,settings*/]
     }
     
     func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
-        return [/*myItem,branchesItem,trunkItem,*/NSToolbarItem.Identifier.flexibleSpace,settings]
+        return [/*myItem,branchesItem,trunkItem,*/NSToolbarItem.Identifier.flexibleSpace,NSToolbarItem.Identifier.print,settings]
     }
     
     func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
@@ -239,6 +238,10 @@ extension DrawViewController{
             let colors = returnColorPicker(label: "branch")
             colors.tag = ColorSchemeIndex.branches.rawValue
             return colors
+        case NSToolbarItem.Identifier.print:
+            let print = NSToolbarItem(itemIdentifier: itemIdentifier)
+            print.isEnabled = true
+            return print
         case trunkItem:
             let colors = returnColorPicker(label: "trunk")
             colors.tag = ColorSchemeIndex.trunk.rawValue
@@ -302,9 +305,7 @@ extension DrawViewController{
 extension DrawViewController : TreeProtocol {
     
     func gotNewTree(tree: Tree) {
-        print("oh, hello")
         drawView.updateTree(newTree:tree)
     }
-    
     
 }
