@@ -66,8 +66,20 @@ class DrawViewController: NSViewController,NSToolbarDelegate,NSWindowDelegate{
     }
    
     @objc @IBAction func printDocument(_ sender: AnyObject) {
-        print("hi!")
-        NSPrintOperation.init(view: self.drawView).run()
+        
+        
+            //Set basic print settings (fit to single page)
+            NSPrintInfo.shared.isVerticallyCentered = true
+            NSPrintInfo.shared.isHorizontallyCentered = true
+            NSPrintInfo.shared.verticalPagination = .fit
+            NSPrintInfo.shared.horizontalPagination = .fit
+            
+       DispatchQueue.main.async {
+            //Run print operation
+            let po = NSPrintOperation.init(view: self.drawView)
+            po.run()
+        }
+        
     }
     
     func setupSliders(){

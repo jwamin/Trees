@@ -20,15 +20,13 @@
 ### TODO
 
 * Fix UI inconsistencies
-    * Selected state on 'advanced' tab bar item
     * Advanced doesn't close if closing main window
-    * normalise initial settings w/ interface builder
+    * normalise initial settings w/ interface builder - partial
 * Persistent storage of trees with `CoreData` / `NSDocumentController`
 * Specific settings for trees instead of globally applied settings
 * Customizable backgrounds
 * Present settings as popover or modal
 * Settings to follow main window on move
-* Refine call to `NSPrintOperation`
 
 #### Frameworks Used
 
