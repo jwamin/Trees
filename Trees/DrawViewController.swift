@@ -50,6 +50,7 @@ class DrawViewController: NSViewController,NSWindowDelegate{
         updateTrackingArea()
     }
    
+    //View Printing
     @objc @IBAction func printDocument(_ sender: AnyObject) {
         
         
@@ -100,6 +101,15 @@ class DrawViewController: NSViewController,NSWindowDelegate{
         
     }
     
+    //Juddery
+    func windowWillMove(_ notification: Notification) {
+        updateAdvancedSettingsPanelPosition()
+    }
+    
+    func windowDidMove(_ notification: Notification) {
+        updateAdvancedSettingsPanelPosition()
+    }
+    
     func windowShouldClose(_ sender: NSWindow) -> Bool {
         
         print("window closing")
@@ -110,6 +120,8 @@ class DrawViewController: NSViewController,NSWindowDelegate{
     }
     
 }
+
+// Toolbar
 
 extension DrawViewController : NSToolbarDelegate{
     
@@ -164,12 +176,12 @@ extension DrawViewController : NSToolbarDelegate{
             let vc = settingsController.window?.contentViewController as! SettingsViewController
             print(vc)
             vc.delegate = self
-            updateWindowPosition()
+            updateAdvancedSettingsPanelPosition()
 
     }
     
     //set position of advanced settigns window to the right of the main window
-    func updateWindowPosition(){
+    func updateAdvancedSettingsPanelPosition(){
         var point = NSPoint(x: (self.view.window?.frame.maxX)!, y: (self.view.window?.frame.minY)!)
         point.y = point.y - ((settingsController.window!.frame.height - self.view.window!.frame.height) / 2)
         settingsController.window?.setFrameOrigin(point)
