@@ -31,7 +31,7 @@ class SettingsWindowController: NSWindowController, NSWindowDelegate {
     }
     
     override func close() {
-        print("close")
+        window?.close()
     }
     
     deinit {

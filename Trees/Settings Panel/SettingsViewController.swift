@@ -227,7 +227,25 @@ class SettingsViewController : NSViewController{
         }
     }
     
-    
+    // MARK: Scroll wheel
+    override func scrollWheel(with event: NSEvent) {
+        super.scrollWheel(with: event)
+        if(angleSlider != nil){
+            if(angleSlider.hitTest(event.locationInWindow) != nil){
+                switch event.deltaY{
+                case let dy where dy > 0:
+                    print("up")
+                    currentAngle += 1.0
+                case let dy where dy < 0:
+                    print("down")
+                    currentAngle -= 1.0
+                default:
+                    currentAngle += 0
+                }
+            }
+        }
+        
+    }
     
     //Reset Functions
     
