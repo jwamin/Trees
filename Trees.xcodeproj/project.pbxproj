@@ -25,6 +25,7 @@
 		3DA7DA212163B03100C1B693 /* Panel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DA7DA1F2163AF6600C1B693 /* Panel.xib */; };
 		3DB635DB215E6DCE00AF9956 /* SettingsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB635DA215E6DCE00AF9956 /* SettingsWindowController.swift */; };
 		3DB635DD215E929F00AF9956 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB635DC215E929F00AF9956 /* Helpers.swift */; };
+		3DB6925421B5DA7800D743C0 /* SettingsPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA7DA1A2163A8B400C1B693 /* SettingsPanel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -367,6 +368,7 @@
 				3DA7DA1D2163A8D600C1B693 /* SettingsViewController.swift in Sources */,
 				3D7CE7E8215BD3E5000E751C /* AppDelegate.swift in Sources */,
 				3DB635DB215E6DCE00AF9956 /* SettingsWindowController.swift in Sources */,
+				3DB6925421B5DA7800D743C0 /* SettingsPanel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

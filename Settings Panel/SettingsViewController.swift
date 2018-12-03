@@ -11,6 +11,21 @@ import TreeSettings
 
 class SettingsViewController : NSViewController{
     
+    @objc dynamic var openState = 0
+    @IBOutlet weak var disclosure: NSButton!{
+        didSet{
+            print(disclosure)
+        }
+    }
+    @IBAction func disclosureAction(_ sender: Any) {
+        if (disclosure.state == .on){
+             openState = 1
+        } else {
+            openState = 0
+        }
+       
+    }
+    @IBOutlet weak var hierarchy: NSScrollView!
     var tree:Tree? {
         didSet{
             print("tree set for settings \(tree)")
