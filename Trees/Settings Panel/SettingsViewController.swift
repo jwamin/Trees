@@ -11,6 +11,12 @@ import TreeSettings
 
 class SettingsViewController : NSViewController{
     
+    var tree:Tree? {
+        didSet{
+            print("tree set for settings \(tree)")
+        }
+    }
+    
     var delegate:TreeProtocol?
     
     var scheme:[ColorSchemeIndex:CGColor] = Settings.forest {
@@ -30,6 +36,7 @@ class SettingsViewController : NSViewController{
             setAngleString()
         }
     }
+    
     
     @objc dynamic var length:CGFloat = CGFloat(Settings.initialLength) {
         didSet{
@@ -145,11 +152,12 @@ class SettingsViewController : NSViewController{
     }
     
     @IBAction func generateTree(_ sender:Any){
-        print("updating",segmentWidths as Any)
-        let tree = Tree(nil)
-        tree.setAll(length: length, segments: segmentWidths, leftAngle: leftAngle, rightAngle: rightAngle)
-        tree.setColorScheme(newScheme: scheme)
-        delegate?.gotNewTree(tree: tree)
+        if let tree = tree{
+            tree.setAll(length: length, segments: segmentWidths, leftAngle: leftAngle, rightAngle: rightAngle)
+            tree.setColorScheme(newScheme: scheme)
+            delegate?.treeUpdated()
+        }
+
     }
 
     

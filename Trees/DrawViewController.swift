@@ -12,7 +12,7 @@ import TreeSettings
 
 class DrawViewController: NSViewController,NSWindowDelegate{
     
-    lazy var settingsController:SettingsWindowController = SettingsWindowController(windowNibName: "Panel")
+    var settingsController:SettingsWindowController?
 
     var delegate:AppDelegate!
     
@@ -45,8 +45,9 @@ class DrawViewController: NSViewController,NSWindowDelegate{
     
         createToolbar()
         
-        locations.append(CGPoint(x: drawView.bounds.midX, y: (drawView.bounds.midY - CGFloat(Settings.initialLength*3/2))))
-        drawView.updatePositions(positions: locations)
+        let initialTree = Tree(CGPoint(x: drawView.bounds.midX, y: (drawView.bounds.midY - CGFloat(Settings.initialLength*3/2))))
+        trees.append(initialTree)
+        drawView.updatePositions(trees: trees)
         updateTrackingArea()
     }
    
@@ -75,12 +76,60 @@ class DrawViewController: NSViewController,NSWindowDelegate{
         
     }
     
+    var trees:[Tree] = []
+    
     var locations:[CGPoint] = []
     
+    func selectTreeAtIndex(index:Int?){
+        for tree in trees{
+            tree.selected = false
+        }
+        
+        guard let index = index else {
+            return
+        }
+        
+        trees[index].selected = true
+        if let available = settingsController?.window?.screen{
+            setTreeForSettings()
+        }
+        
+        drawView.updatePositions(trees: trees)
+    }
+
+    override func rightMouseDown(with event: NSEvent) {
+    
+            selectTreeAtIndex(index: nil)
+            drawView.updatePositions(trees: trees)
+        
+    }
+    
     override func mouseDown(with event: NSEvent) {
-       let point = self.drawView.convert(event.locationInWindow, to: nil)
-        locations.append(point)
-        drawView.updatePositions(positions: self.locations)
+
+        
+        let point = self.drawView.convert(event.locationInWindow, to: nil)
+        var hit = false
+        for (index,tree) in trees.enumerated(){
+            if((tree.box?.contains(point))!){
+                hit = true
+                
+                selectTreeAtIndex(index:index);
+                break;
+            }
+            
+        }
+        
+        if(!hit){
+            let tree = Tree(point)
+            trees.append(tree)
+            drawView.updatePositions(trees: trees)
+        }
+
+        
+        
+
+        
+        
     }
     
     override func mouseEntered(with event: NSEvent) {
@@ -114,6 +163,10 @@ class DrawViewController: NSViewController,NSWindowDelegate{
         
         print("window closing")
         delegate.windowIsOpen = false
+        guard let settingsController = settingsController else {
+            print("no window to close")
+            return false
+        }
         settingsController.close()
         return true
         
@@ -170,18 +223,44 @@ extension DrawViewController : NSToolbarDelegate{
         
     }
     
+    func getSelectedTree()->Tree?{
+        for tree in trees{
+            if tree.selected{
+                return tree
+            }
+        }
+        return nil
+    }
     
     @objc func displaySettingsPanel(_ sender: Any?) {
-        
+            settingsController = SettingsWindowController(windowNibName: "Panel")
+        guard let settingsController = self.settingsController else{
+            print("no window")
+            return
+        }
             let vc = settingsController.window?.contentViewController as! SettingsViewController
-            print(vc)
+            setTreeForSettings()
             vc.delegate = self
             updateAdvancedSettingsPanelPosition()
 
     }
     
+    func setTreeForSettings(){
+        guard let settingsController = settingsController else {
+            print("no settings window")
+            return
+        }
+        let vc = settingsController.window?.contentViewController as! SettingsViewController
+        print(vc)
+        vc.tree = getSelectedTree()
+    }
+    
     //set position of advanced settigns window to the right of the main window
     func updateAdvancedSettingsPanelPosition(){
+        guard let settingsController = settingsController else {
+            print("no settings window")
+            return
+        }
         var point = NSPoint(x: (self.view.window?.frame.maxX)!, y: (self.view.window?.frame.minY)!)
         point.y = point.y - ((settingsController.window!.frame.height - self.view.window!.frame.height) / 2)
         settingsController.window?.setFrameOrigin(point)
@@ -190,9 +269,9 @@ extension DrawViewController : NSToolbarDelegate{
 }
 
 extension DrawViewController : TreeProtocol {
-    
-    func gotNewTree(tree: Tree) {
-        drawView.updateTree(newTree:tree)
+
+    func treeUpdated() {
+        drawView.updatePositions(trees: trees)
     }
     
 }

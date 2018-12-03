@@ -19,23 +19,13 @@ public class TreeDrawView: NSView {
     var rightAdjust:CGFloat?
     var colorScheme = Settings.forest
     
-    var positions:[CGPoint] = []
-    
-    var tree:Tree! {
-        didSet{
-            setNeedsDisplay(self.frame)
-        }
-    }
+    var trees:[Tree]!
     
 //    override func makeBackingLayer() -> CALayer {
 //        print("will return layer")
 //        return CALayer()
 //    }
     
-    public func updateTree(newTree:Tree){
-        print("updating tree")
-        tree = newTree
-    }
     
     public func updateColors(index:Int){
         //colorScheme[ColorSchemeIndex(rawValue: index)!] = NSColorPanel.shared.color.cgColor
@@ -43,8 +33,8 @@ public class TreeDrawView: NSView {
         self.setNeedsDisplay(self.frame)
     }
     
-    public func updatePositions(positions:[CGPoint]){
-        self.positions = positions
+    public func updatePositions(trees:[Tree]){
+        self.trees = trees
         self.setNeedsDisplay(self.frame)
     }
     
@@ -60,7 +50,7 @@ public class TreeDrawView: NSView {
     
     public override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
-        tree = Tree(nil)
+        
     }
     
     required init?(coder decoder: NSCoder) {
@@ -75,7 +65,7 @@ public class TreeDrawView: NSView {
     public override func draw(_ dirtyRect: NSRect) {
         
         super.draw(dirtyRect)
-        print("drawing",frame)
+
         // Drawing code here.
         let context = NSGraphicsContext.current?.cgContext
         context?.fill(dirtyRect)
@@ -84,25 +74,38 @@ public class TreeDrawView: NSView {
         context?.setLineWidth(5.0)
         context?.setLineCap(.round)
  
-        colorScheme = tree.getColorScheme()
+
         
-        angleAdjust = CGFloat(tree.getAngle())
-        
-        if let rightAngle = tree.getRightAngleIfAny(){
-            rightAdjust = CGFloat(rightAngle)
-        } else {
-            rightAdjust = angleAdjust
-        }
-        
-        for position in positions{
+        for tree in trees{
+            colorScheme = tree.getColorScheme()
+            
+            angleAdjust = CGFloat(tree.getAngle())
+            
+            if let rightAngle = tree.getRightAngleIfAny(){
+                rightAdjust = CGFloat(rightAngle)
+            } else {
+                rightAdjust = angleAdjust
+            }
             //let fixpoint = CGPoint(x: CGFloat(i) * self.frame.midX, y: self.frame.midY-CGFloat(Settings.initialLength)*1.5)
+            let position = tree.getPosition()
             context?.move(to: position)
-            recursiveDraw(position:position, angle: 90,distance: tree.getLength(), iteration: limit)
+            var boundingBox = CGRect(origin: position, size: CGSize(width: 0, height: 0))
+            recursiveDraw(box:&boundingBox,tree:tree,position:position, angle: 90,distance: tree.getLength(), iteration: limit)
+            
+            tree.setBoundingBox(boundingBox:boundingBox)
+            if(tree.selected){
+                context?.setLineJoin(.round)
+                context?.setLineWidth(1.0)
+                context?.setStrokeColor(NSColor.red.cgColor)
+                context?.stroke(boundingBox)
+            }
+
+
         }
         
     }
     
-    func recursiveDraw(position:CGPoint,angle:CGFloat,distance:CGFloat,iteration:Int){
+    func recursiveDraw(box:inout CGRect,tree:Tree,position:CGPoint,angle:CGFloat,distance:CGFloat,iteration:Int){
         
         //this is a recursive function so execution needs to be tracked carefully
         
@@ -168,8 +171,11 @@ public class TreeDrawView: NSView {
         
         context?.setLineWidth(width)
         
+        
+        
         //draw
         context?.beginPath()
+        box = box.union(path.boundingBox)
         context?.addPath(path)
         context?.strokePath()
         
@@ -177,8 +183,8 @@ public class TreeDrawView: NSView {
         let newDistance = distance / 4 * 3
         
         //2 calls to same recursive function, adjusted angle creates mirrored divergence from originally passed position
-        recursiveDraw(position: newposition, angle: angle-angleAdjust, distance: newDistance, iteration: newiteration)
-        recursiveDraw(position: newposition, angle: angle+rightAdjust!, distance: newDistance, iteration: newiteration)
+        recursiveDraw(box:&box, tree: tree,position: newposition, angle: angle-angleAdjust, distance: newDistance, iteration: newiteration)
+        recursiveDraw(box:&box, tree: tree,position: newposition, angle: angle+rightAdjust!, distance: newDistance, iteration: newiteration)
         
     }
     

@@ -44,12 +44,26 @@ public class Tree {
     
     var branches = Settings.recursionLimit
     
+    public var selected = false
+    
+    public private(set) var box:CGRect? // genius!
+    
     private var colorScheme:[ColorSchemeIndex:CGColor] = Settings.forest
     
     private var segmentWidths:[ColorSchemeIndex:CGFloat]?
     
     public init(_ placeAtPoint:CGPoint?) {
         position = placeAtPoint
+    }
+    
+    
+    
+    public func setBoundingBox(boundingBox:CGRect){
+        box = boundingBox
+    }
+    
+    public func getPosition()->CGPoint{
+        return position!
     }
     
     public func printColor(){
@@ -165,5 +179,5 @@ public struct UpdatedSettings {
 }
 
 public protocol TreeProtocol {
-    func gotNewTree(tree:Tree)
+    func treeUpdated()
 }
