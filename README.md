@@ -28,6 +28,10 @@
 * Present settings as popover or modal
 * Settings to follow main window on move
 
+### BUGS
+
+* Introduced a bug that instantiates 'advanced' panel when window is moved or resized.
+
 #### Frameworks Used
 
 `Cocoa` `CoreGraphics`
