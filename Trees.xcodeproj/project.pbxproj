@@ -21,7 +21,6 @@
 		3D7CE7E8215BD3E5000E751C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7CE7E7215BD3E5000E751C /* AppDelegate.swift */; };
 		3D7CE7EA215BD3E7000E751C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D7CE7E9215BD3E7000E751C /* Assets.xcassets */; };
 		3D7CE7ED215BD3E7000E751C /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D7CE7EB215BD3E7000E751C /* MainMenu.xib */; };
-		3DA7DA1B2163A8B400C1B693 /* SettingsPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA7DA1A2163A8B400C1B693 /* SettingsPanel.swift */; };
 		3DA7DA1D2163A8D600C1B693 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA7DA1C2163A8D600C1B693 /* SettingsViewController.swift */; };
 		3DA7DA212163B03100C1B693 /* Panel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DA7DA1F2163AF6600C1B693 /* Panel.xib */; };
 		3DB635DB215E6DCE00AF9956 /* SettingsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB635DA215E6DCE00AF9956 /* SettingsWindowController.swift */; };
@@ -150,6 +149,7 @@
 				3D7CE7F9215BF791000E751C /* README.md */,
 				3D7C62292162A18500F8C495 /* Main.playground */,
 				3D7CE7E6215BD3E5000E751C /* Trees */,
+				3DA7DA192163A88C00C1B693 /* Settings Panel */,
 				3D7C621C2162A14A00F8C495 /* TreeSettings */,
 				3D22BBED21654458007C2470 /* TreeDraw */,
 				3D7CE7E5215BD3E5000E751C /* Products */,
@@ -174,7 +174,6 @@
 				3D7CE7E7215BD3E5000E751C /* AppDelegate.swift */,
 				3D7CE7F5215BD471000E751C /* DrawViewController.swift */,
 				3D7CE7EB215BD3E7000E751C /* MainMenu.xib */,
-				3DA7DA192163A88C00C1B693 /* Settings Panel */,
 				3DB635DC215E929F00AF9956 /* Helpers.swift */,
 				3D7CE7E9215BD3E7000E751C /* Assets.xcassets */,
 				3D7CE7EE215BD3E7000E751C /* Info.plist */,
@@ -368,7 +367,6 @@
 				3DA7DA1D2163A8D600C1B693 /* SettingsViewController.swift in Sources */,
 				3D7CE7E8215BD3E5000E751C /* AppDelegate.swift in Sources */,
 				3DB635DB215E6DCE00AF9956 /* SettingsWindowController.swift in Sources */,
-				3DA7DA1B2163A8B400C1B693 /* SettingsPanel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
