@@ -20,6 +20,12 @@ class DrawViewController: NSViewController,NSWindowDelegate{
     
     var rect:NSRect!
     
+    var trees:[Tree] = [] {
+        didSet{
+            drawView.updatePositions(trees: trees)
+        }
+    }
+    
     convenience init(rect:NSRect){
         self.init(nibName: nil, bundle: nil)
         self.rect = rect
@@ -76,9 +82,7 @@ class DrawViewController: NSViewController,NSWindowDelegate{
         
     }
     
-    var trees:[Tree] = []
-    
-    var locations:[CGPoint] = []
+    //Select Items in Model Array
     
     func selectTreeAtIndex(index:Int?){
         for tree in trees{
@@ -86,71 +90,21 @@ class DrawViewController: NSViewController,NSWindowDelegate{
         }
         
         guard let index = index else {
+            treeUpdated()
             return
         }
         
         trees[index].selected = true
+        treeUpdated()
         if let available = settingsController?.window?.screen{
             setTreeForSettings()
         }
         
-        drawView.updatePositions(trees: trees)
+        
     }
 
-    override func rightMouseDown(with event: NSEvent) {
     
-            selectTreeAtIndex(index: nil)
-            drawView.updatePositions(trees: trees)
-        
-    }
-    
-    override func mouseDown(with event: NSEvent) {
-
-        
-        let point = self.drawView.convert(event.locationInWindow, to: nil)
-        var hit = false
-        for (index,tree) in trees.enumerated(){
-            if((tree.box?.contains(point))!){
-                hit = true
-                
-                selectTreeAtIndex(index:index);
-                break;
-            }
-            
-        }
-        
-        if(!hit){
-            let tree = Tree(point)
-            trees.append(tree)
-            drawView.updatePositions(trees: trees)
-        }
-
-        
-        
-
-        
-        
-    }
-    
-    override func mouseEntered(with event: NSEvent) {
-        super.mouseEntered(with: event)
-        NSCursor.crosshair.set()
-    }
-    
-    override func mouseExited(with event: NSEvent) {
-        super.mouseExited(with: event)
-        NSCursor.arrow.set()
-    }
-    
-    //Deinit methods
-    deinit {
-
-        delegate = nil
-        self.resignFirstResponder()
-        
-    }
-    
-    //Juddery
+    //Window Responder methods -- somewhat juddery
     func windowWillMove(_ notification: Notification) {
         updateAdvancedSettingsPanelPosition()
     }
@@ -172,7 +126,69 @@ class DrawViewController: NSViewController,NSWindowDelegate{
         
     }
     
+    //Deinit methods
+    deinit {
+        
+        delegate = nil
+        self.resignFirstResponder()
+        
+    }
+    
 }
+
+//Mouse Events
+
+extension DrawViewController {
+    
+    override func mouseDown(with event: NSEvent) {
+        
+        //get cursor pointer in view
+        let point = self.drawView.convert(event.locationInWindow, to: nil)
+        var hit = false
+        
+        //loop through models
+        for (index,tree) in trees.enumerated(){
+            if((tree.box?.contains(point))!){
+                //if there is an intersection with a bounding box, select the index
+                hit = true
+                selectTreeAtIndex(index:index);
+                break;
+            }
+            
+        }
+        
+        //if the cursor does not intersect with a bounding box, greate a tree
+        if(!hit){
+            
+            let tree = Tree(point)
+            trees.append(tree)
+            
+        }
+        
+        
+    }
+    
+    override func rightMouseDown(with event: NSEvent) {
+        
+        selectTreeAtIndex(index: nil)
+        
+    }
+    
+    //Mouse Pointer changes
+    
+    override func mouseEntered(with event: NSEvent) {
+        super.mouseEntered(with: event)
+        NSCursor.crosshair.set()
+    }
+    
+    override func mouseExited(with event: NSEvent) {
+        super.mouseExited(with: event)
+        NSCursor.arrow.set()
+    }
+    
+}
+
+
 
 // Toolbar
 
@@ -233,16 +249,17 @@ extension DrawViewController : NSToolbarDelegate{
     }
     
     @objc func displaySettingsPanel(_ sender: Any?) {
+        
+        if let settingsController = self.settingsController {
+            settingsController.window?.makeKeyAndOrderFront(self)
+        } else {
             settingsController = SettingsWindowController(windowNibName: "Panel")
-        guard let settingsController = self.settingsController else{
-            print("no window")
-            return
-        }
-            let vc = settingsController.window?.contentViewController as! SettingsViewController
-            setTreeForSettings()
+            let vc = settingsController!.window?.contentViewController as! SettingsViewController
+            
             vc.delegate = self
             updateAdvancedSettingsPanelPosition()
-
+        }
+        setTreeForSettings()
     }
     
     func setTreeForSettings(){

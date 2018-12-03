@@ -7,6 +7,7 @@
 ### Features
 
 *  Draw Fractal trees
+* Trees selectable with left mouse button, hierarchy denotes which trees selected
 * Customizable drawing parameters including:
     *  Initial trunk length
     * Trunk, branches and tip segment widths.
@@ -23,10 +24,10 @@
     * Advanced doesn't close if closing main window
     * normalise initial settings w/ interface builder - partial
 * Persistent storage of trees with `CoreData` / `NSDocumentController`
-* Specific settings for trees instead of globally applied settings
 * Customizable backgrounds
 * Present settings as popover or modal
-* Settings to follow main window on move
+* Settings to follow main window on move - partial, 
+* Scene Graph / List with delete option, bindings to advanced detail panel
 
 ### BUGS
 
