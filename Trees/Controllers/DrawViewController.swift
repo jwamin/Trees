@@ -53,6 +53,7 @@ class DrawViewController: NSViewController,NSWindowDelegate{
         
         let initialTree = Tree(CGPoint(x: drawView.bounds.midX, y: (drawView.bounds.midY - CGFloat(Settings.initialLength*3/2))))
         trees.append(initialTree)
+        print(trees)
         drawView.updatePositions(trees: trees)
         updateTrackingArea()
     }
@@ -126,7 +127,6 @@ class DrawViewController: NSViewController,NSWindowDelegate{
     //Deinit methods
     deinit {
         
-       
         self.resignFirstResponder()
         
     }
@@ -154,7 +154,7 @@ extension DrawViewController {
             
         }
         
-        //if the cursor does not intersect with a bounding box, greate a tree
+        //if the cursor does not intersect with a bounding box, create a tree
         if(!hit){
             
             let tree = Tree(point)
@@ -173,6 +173,7 @@ extension DrawViewController {
     
     //Mouse Pointer changes
     
+    //fix this to reflect action when clicked
     override func mouseEntered(with event: NSEvent) {
         super.mouseEntered(with: event)
         NSCursor.crosshair.set()
@@ -187,6 +188,8 @@ extension DrawViewController {
         guard let selected = getSelectedTree() else {
             return
         }
+        
+        //fix this to move position relatively w/hand drag movements
         let newPosition = event.locationInWindow
         selected.setPosition(point: newPosition)
         treeUpdated()
@@ -207,7 +210,6 @@ extension DrawViewController : NSToolbarDelegate{
         toolbar.allowsUserCustomization = true
         toolbar.allowsExtensionItems = true
         toolbar.delegate = self
-        print("window",self.view.window)
         self.view.window?.toolbar = toolbar
         
     }

@@ -11,6 +11,6 @@ import Foundation
 //Maths
 
 //No need to include GLKit here...
-func degToRad(deg:CGFloat)->CGFloat{
+public func degToRad(deg:CGFloat)->CGFloat{
     return deg * (.pi / 180)
 }

@@ -10,43 +10,15 @@ import Cocoa
 import TreeSettings
 
 public class TreeDrawView: NSView {
-
+    
     private var drawcount = 0
     
-    var distance:CGFloat = CGFloat(Settings.initialLength)
-    var limit:Int = Settings.recursionLimit
+    
     var angleAdjust:CGFloat = CGFloat(Settings.initialAngle)
     var rightAdjust:CGFloat?
-    var colorScheme = Settings.forest
+    var colorScheme:[ColorSchemeIndex:CGColor] = Settings.space
     
     var trees:[Tree]!
-    
-//    override func makeBackingLayer() -> CALayer {
-//        print("will return layer")
-//        return CALayer()
-//    }
-    
-    
-    public func updateColors(index:Int){
-        //colorScheme[ColorSchemeIndex(rawValue: index)!] = NSColorPanel.shared.color.cgColor
-        print(colorScheme)
-        self.setNeedsDisplay(self.frame)
-    }
-    
-    public func updatePositions(trees:[Tree]){
-        self.trees = trees
-        self.setNeedsDisplay(self.frame)
-    }
-    
-    public func updateSettings(settings:UpdatedSettings?){
-       
-        if let settings = settings{
-            angleAdjust = CGFloat(settings.angle)
-            distance = CGFloat(settings.length)
-        }
-
-        self.setNeedsDisplay(self.frame)
-    }
     
     public override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
@@ -61,11 +33,17 @@ public class TreeDrawView: NSView {
         drawcount = 0
     }
     
+    public func updatePositions(trees:[Tree]){
+        self.trees = trees
+        self.setNeedsDisplay(self.frame)
+    }
+    
+    
     
     public override func draw(_ dirtyRect: NSRect) {
         
         super.draw(dirtyRect)
-
+        
         // Drawing code here.
         let context = NSGraphicsContext.current?.cgContext
         context?.fill(dirtyRect)
@@ -73,10 +51,9 @@ public class TreeDrawView: NSView {
         context?.setStrokeColor(NSColor.white.cgColor)
         context?.setLineWidth(5.0)
         context?.setLineCap(.round)
- 
-
         
         for tree in trees{
+            
             colorScheme = tree.getColorScheme()
             
             angleAdjust = CGFloat(tree.getAngle())
@@ -90,17 +67,19 @@ public class TreeDrawView: NSView {
             let position = tree.getPosition()
             context?.move(to: position)
             var boundingBox = CGRect(origin: position, size: CGSize(width: 0, height: 0))
-            recursiveDraw(box:&boundingBox,tree:tree,position:position, angle: 90,distance: tree.getLength(), iteration: limit)
+            recursiveDraw(box:&boundingBox,tree:tree,position:position, angle: 90,distance: tree.getLength(), iteration: tree.branches)
             
             tree.setBoundingBox(boundingBox:boundingBox)
+            
+            //refactor this to interpolate a CAShapeLayer
             if(tree.selected){
                 context?.setLineJoin(.round)
                 context?.setLineWidth(1.0)
                 context?.setStrokeColor(NSColor.red.cgColor)
                 context?.stroke(boundingBox)
             }
-
-
+            
+            
         }
         
     }
@@ -136,7 +115,7 @@ public class TreeDrawView: NSView {
         path.move(to: position)
         
         //set adjusted line width for path
-         // reduce the line thickness as we get further up the tree
+        // reduce the line thickness as we get further up the tree
         
         //line to new position
         path.addLine(to: newposition)
@@ -147,7 +126,7 @@ public class TreeDrawView: NSView {
         
         //deduce colorscheme color for path
         switch iteration {
-        case let trunk where (trunk == limit || trunk == limit-1):
+        case let trunk where (trunk == tree.branches || trunk == tree.branches-1):
             //bottom of tree, allmost all iterations left
             context?.setStrokeColor(colorScheme[.trunk] ?? Settings.white)
             if let segments = segementsSet {
@@ -168,9 +147,7 @@ public class TreeDrawView: NSView {
         }
         
         
-        
         context?.setLineWidth(width)
-        
         
         
         //draw
