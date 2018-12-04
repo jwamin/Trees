@@ -66,6 +66,10 @@ public class Tree {
         return position!
     }
     
+    public func setPosition(point:CGPoint){
+        position = point
+    }
+    
     public func printColor(){
         print(self.colorScheme)
     }

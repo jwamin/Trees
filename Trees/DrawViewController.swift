@@ -14,7 +14,7 @@ class DrawViewController: NSViewController,NSWindowDelegate{
     
     var settingsController:SettingsWindowController?
 
-    var delegate:AppDelegate!
+    //var delegate:AppDelegate!
     
     var drawView:TreeDrawView!
     
@@ -41,7 +41,7 @@ class DrawViewController: NSViewController,NSWindowDelegate{
         super.viewDidLoad()
 
         //get delegate
-        delegate = NSApp.delegate as? AppDelegate
+        //delegate = NSApp.delegate as? AppDelegate
 
         // Do view setup here.
         drawView = TreeDrawView(frame: NSRect(origin: .zero, size: rect.size))
@@ -116,12 +116,9 @@ class DrawViewController: NSViewController,NSWindowDelegate{
     func windowShouldClose(_ sender: NSWindow) -> Bool {
         
         print("window closing")
-        delegate.windowIsOpen = false
-        guard let settingsController = settingsController else {
-            print("no window to close")
-            return false
-        }
-        settingsController.close()
+        
+
+        settingsController?.close()
         return true
         
     }
@@ -129,7 +126,7 @@ class DrawViewController: NSViewController,NSWindowDelegate{
     //Deinit methods
     deinit {
         
-        delegate = nil
+       
         self.resignFirstResponder()
         
     }
@@ -186,6 +183,15 @@ extension DrawViewController {
         NSCursor.arrow.set()
     }
     
+    override func mouseDragged(with event: NSEvent) {
+        guard let selected = getSelectedTree() else {
+            return
+        }
+        let newPosition = event.locationInWindow
+        selected.setPosition(point: newPosition)
+        treeUpdated()
+    }
+    
 }
 
 
@@ -201,7 +207,8 @@ extension DrawViewController : NSToolbarDelegate{
         toolbar.allowsUserCustomization = true
         toolbar.allowsExtensionItems = true
         toolbar.delegate = self
-        delegate.windowController.window?.toolbar = toolbar
+        print("window",self.view.window)
+        self.view.window?.toolbar = toolbar
         
     }
     

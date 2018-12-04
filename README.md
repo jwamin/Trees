@@ -23,6 +23,7 @@
 * Fix UI inconsistencies
     * Advanced doesn't close if closing main window
     * normalise initial settings w/ interface builder - partial
+* refactor bounding box to use CAShapeLayer
 * Persistent storage of trees with `CoreData` / `NSDocumentController`
 * Customizable backgrounds
 * Present settings as popover or modal
