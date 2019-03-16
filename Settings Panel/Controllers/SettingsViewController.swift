@@ -28,7 +28,9 @@ class SettingsViewController : NSViewController{
     @IBOutlet weak var hierarchy: NSScrollView!
     var tree:Tree? {
         didSet{
-            print("tree set for settings \(tree)")
+            if let tree = tree{
+                print("tree set for settings \(tree)")
+            }
         }
     }
     

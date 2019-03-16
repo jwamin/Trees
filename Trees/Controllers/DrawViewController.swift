@@ -97,7 +97,7 @@ class DrawViewController: NSViewController,NSWindowDelegate{
         
         trees[index].selected = true
         treeUpdated()
-        if let available = settingsController?.window?.screen{
+        if let _ = settingsController?.window?.screen{
             setTreeForSettings()
         }
         
