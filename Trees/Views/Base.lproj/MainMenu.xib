@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="18122" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="18122"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -78,7 +78,7 @@
                             <menuItem title="Show Sidebar" keyEquivalent="s" id="kIP-vf-haE">
                                 <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
                                 <connections>
-                                    <action selector="toggleSourceList:" target="-1" id="iwa-gc-5KM"/>
+                                    <action selector="toggleSidebar:" target="-1" id="iwa-gc-5KM"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Enter Full Screen" keyEquivalent="f" id="4J7-dP-txa">
@@ -128,6 +128,7 @@
                     </menu>
                 </menuItem>
             </items>
+            <point key="canvasLocation" x="-22" y="132"/>
         </menu>
         <userDefaultsController representsSharedInstance="YES" id="Ftc-U8-Dcq"/>
     </objects>

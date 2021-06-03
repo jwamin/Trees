@@ -240,7 +240,7 @@ extension DrawViewController : NSToolbarDelegate{
             settings.toolTip = "Adjust advanced settings"
             settings.target = self
             settings.action = #selector(displaySettingsPanel(_:))
-            settings.image = NSImage(named: NSImage.Name("NSAdvanced"))
+            settings.image = NSImage(named: NSImage.Name("NSActionTemplate"))
             return settings
         default:
             return nil

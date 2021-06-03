@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="18122" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="18122"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -12,18 +12,27 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="731" height="391"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1177"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1175"/>
             <view key="contentView" wantsLayer="YES" id="EiT-Mj-1SZ" customClass="TreeDrawView" customModule="Trees">
                 <rect key="frame" x="0.0" y="0.0" width="731" height="391"/>
-                <autoresizingMask key="autoresizingMask"/>
+                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             </view>
             <toolbar key="toolbar" implicitIdentifier="2AC5DFF1-177D-48CD-AB63-24E04207529F" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="fCu-0j-JDm">
                 <allowedToolbarItems>
                     <toolbarItem implicitItemIdentifier="NSToolbarShowColorsItem" id="k4u-LS-qfk"/>
-                    <toolbarItem implicitItemIdentifier="BB0C2100-B63B-4BF4-A560-8C0BA8F67AAD" label="Toolbar Item" paletteLabel="Toolbar Item" tag="-1" id="ghY-BW-9OT"/>
-                    <toolbarItem implicitItemIdentifier="33CBB30C-DE0F-4631-A90E-8D51EFBC0432" label="Toolbar Item" paletteLabel="Toolbar Item" tag="-1" id="C3Y-55-WWu"/>
+                    <toolbarItem implicitItemIdentifier="BB0C2100-B63B-4BF4-A560-8C0BA8F67AAD" label="Toolbar Item" paletteLabel="Toolbar Item" tag="-1" image="gear" id="ghY-BW-9OT">
+                        <size key="minSize" width="22" height="22"/>
+                        <size key="maxSize" width="22" height="22"/>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="33CBB30C-DE0F-4631-A90E-8D51EFBC0432" label="Toolbar Item" paletteLabel="Toolbar Item" tag="-1" id="C3Y-55-WWu">
+                        <size key="minSize" width="32" height="32"/>
+                        <size key="maxSize" width="32" height="32"/>
+                    </toolbarItem>
                     <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="UnT-s3-FxI"/>
-                    <toolbarItem implicitItemIdentifier="2A512C30-CD38-4532-B976-F34FC079EA40" label="Settings" paletteLabel="Settings" tag="-1" id="OHb-KC-ACu"/>
+                    <toolbarItem implicitItemIdentifier="2A512C30-CD38-4532-B976-F34FC079EA40" label="Settings" paletteLabel="Settings" tag="-1" id="OHb-KC-ACu">
+                        <size key="minSize" width="32" height="32"/>
+                        <size key="maxSize" width="32" height="32"/>
+                    </toolbarItem>
                 </allowedToolbarItems>
                 <defaultToolbarItems>
                     <toolbarItem reference="k4u-LS-qfk"/>
@@ -45,7 +54,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" utility="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="132" width="257" height="379"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1177"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1175"/>
             <view key="contentView" id="apD-ig-e4r">
                 <rect key="frame" x="0.0" y="0.0" width="257" height="379"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -157,4 +166,7 @@
             <point key="canvasLocation" x="-481" y="109"/>
         </window>
     </objects>
+    <resources>
+        <image name="gear" width="128" height="128"/>
+    </resources>
 </document>
